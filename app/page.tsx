@@ -1,3 +1,8 @@
+import Welcome from "./welcome/page";
 export default function Home() {
-  return <div>Hello Nextjs</div>;
+  return (
+    <div>
+      <Welcome />
+    </div>
+  );
 }
