@@ -7,7 +7,7 @@ export default function RootLayout({
   return (
     <div>
       <NavBar />
-      {children}
+      <div className="h-screen">{children}</div>
     </div>
   );
 }
