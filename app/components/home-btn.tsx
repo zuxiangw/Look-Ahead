@@ -3,7 +3,7 @@ import Link from "next/link";
 const HomeBtn = () => {
   return (
     <button className="bg-orange-500">
-      <Link href="/home">Home</Link>
+      <Link href="/home/search">Home</Link>
     </button>
   );
 };
