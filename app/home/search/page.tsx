@@ -1,4 +1,4 @@
-import SearchBar from "./searchComponent/searchBar";
+import SearchBar from "./searchBar";
 const SearchPage = () => {
   return (
     <section className="h-1/3 flex flex-col justify-evenly text-center">
