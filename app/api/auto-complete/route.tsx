@@ -1,11 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-
-interface Simple_Place {
-  main_text: String;
-  secondary_text: String;
-  place_id: String;
-}
-
+import AutoData from "@/app/interfaces/AutoData";
 export async function GET(req: NextRequest) {
   const userInput: string | null = req.nextUrl.searchParams.get("text");
   if (userInput === null || userInput.length === 0)
@@ -32,11 +26,11 @@ export async function GET(req: NextRequest) {
   const predicts = data.predictions;
   if (predicts.length == 0) return NextResponse.json({ status: 200, data: [] });
   else {
-    const placesArray: Simple_Place[] = new Array(predicts.length);
+    const placesArray: AutoData[] = new Array(predicts.length);
     const length: number = predicts.length > 5 ? 5 : predicts.length;
     for (let i = 0; i < length; i++) {
       const match = predicts[i];
-      const place: Simple_Place = {
+      const place: AutoData = {
         main_text: match.structured_formatting.main_text,
         secondary_text: match.structured_formatting.secondary_text,
         place_id: match.place_id,

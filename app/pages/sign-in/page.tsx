@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
-import SignUpBtn from "../components/sign-up-btn";
-import HomeBtn from "../components/home-btn";
+import SignUpBtn from "../../components/sign-up-btn";
+import HomeBtn from "../../components/home-btn";
 const SignIn = () => {
   return (
     <div>

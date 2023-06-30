@@ -1,4 +1,4 @@
-import SignInBtn from "../components/sign-in-btn";
+import SignInBtn from "../../components/sign-in-btn";
 const SignUp = () => {
   return (
     <div>

@@ -17,8 +17,6 @@ const SearchBar = () => {
         const data = await res.json();
         setSearchInfo([]);
         setSearchInfo(data.data);
-      } else {
-        setSearchInfo([]);
       }
     } catch (error) {
       console.log(
@@ -47,7 +45,7 @@ const SearchBar = () => {
   };
 
   return (
-    <div className="flex flex-col items-center h-1/2">
+    <div className="flex flex-col items-center h-min mt-14">
       <form className="w-3/4 grid grid-cols-7" onSubmit={handleSearchBtn}>
         <input
           type="text"
