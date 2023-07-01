@@ -2,12 +2,15 @@
 
 import { useEffect, useState } from "react";
 import RecommendData from "@/app/interfaces/RecommendData";
+// @ts-ignore
+import ReactStars from "react-rating-stars-component";
 
 const Recommendation = () => {
-  const [recommendPlaces, setRecommendPlaces] = useState<RecommendData[]>([]);
+  const [recommendPlaces, setRecommendPlaces] = useState<
+    RecommendData[] | null
+  >(null);
 
   useEffect(() => {
-    console.log("asdasd");
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         onLocationSuccess,
@@ -41,9 +44,7 @@ const Recommendation = () => {
     }
 
     const recommendations: RecommendData[] = res_data.data;
-    console.log(recommendations);
     setRecommendPlaces(recommendations);
-    console.log("updating recommended places");
   };
 
   const onLocationSuccess = (position: GeolocationPosition) => {
@@ -68,10 +69,15 @@ const Recommendation = () => {
         break;
     }
   };
-
-  if (recommendPlaces.length !== 0) {
+  if (recommendPlaces === null) {
     return (
       <section className="mt-14">
+        <h1>Loading</h1>
+      </section>
+    );
+  } else if (recommendPlaces.length !== 0) {
+    return (
+      <section className="mt-14 flex flex-col items-center">
         {recommendPlaces.map((recommendPlace: RecommendData) => {
           return (
             <RecommendationBlock
@@ -85,10 +91,7 @@ const Recommendation = () => {
   } else {
     return (
       <section className="mt-14">
-        <h1>
-          There is no data found or you did not allow the website to have your
-          location
-        </h1>
+        <h1>There is no tourist attraction found near you ...</h1>
       </section>
     );
   }
@@ -106,14 +109,30 @@ const RecommendationBlock = ({
   }, [recommendation]);
 
   return (
-    <div>
-      <h1>{recommendation.place_name}</h1>
-      <h3>{recommendation.place_rating}</h3>
-      <h3>{recommendation.rating_amount}</h3>
-      <img
-        src={`data:${recommendation.photo_type};base64,${imageUrl}`}
-        alt="Recommendation Image"
-      />
+    <div className="grid grid-cols-2 mb-8 w-1/2 border-4 border-black rounded-xl p-8">
+      <div className="flex flex-col justify-center items-center">
+        <h1 className="uppercase text-xl font-bold flex items-center justify-center">
+          {recommendation.place_name}
+        </h1>
+        <div className="flex justify-center items-center">
+          <ReactStars
+            counter={5}
+            value={recommendation.place_rating}
+            edit={false}
+            size={36}
+          />
+        </div>
+        <h3>
+          Out of <strong>{recommendation.rating_amount}</strong> total ratings
+        </h3>
+      </div>
+      <div>
+        <img
+          src={`data:${recommendation.photo_type};base64,${imageUrl}`}
+          alt="Recommendation Image"
+          className="rounded-xl"
+        />
+      </div>
     </div>
   );
 };

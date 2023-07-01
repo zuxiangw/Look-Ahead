@@ -51,6 +51,5 @@ export async function POST(req: NextRequest) {
     }
   );
   const response_data: RecommendData[] = await Promise.all(data_promises);
-  console.log(response_data);
   return NextResponse.json({ status: 200, data: response_data });
 }

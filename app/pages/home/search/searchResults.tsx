@@ -26,7 +26,7 @@ interface SearchResultProps {
 
 const SearchResult: React.FC<SearchResultProps> = ({ result }) => {
   return (
-    <div className="h-12 col-start-3 col-end-6 flex justify-center items-center border-2 border-black px-2">
+    <div className="h-12 col-start-3 col-end-6 flex justify-center items-center border-2 border-black px-2 bg-white">
       <h4>
         {" "}
         <strong>{result.main_text}</strong>
