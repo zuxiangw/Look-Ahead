@@ -1,4 +1,5 @@
 import NavBar from "../../components/navbar";
+import Footer from "@/app/components/footer";
 export default function RootLayout({
   children,
 }: {
@@ -7,7 +8,8 @@ export default function RootLayout({
   return (
     <div>
       <NavBar />
-      <div className="h-screen">{children}</div>
+      <div className="h-fit">{children}</div>
+      <Footer />
     </div>
   );
 }
