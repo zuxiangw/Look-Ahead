@@ -9,6 +9,7 @@ const Recommendation = () => {
   const [recommendPlaces, setRecommendPlaces] = useState<
     RecommendData[] | null
   >(null);
+  const [nextToken, setNextToken] = useState<string | undefined>(undefined);
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -43,8 +44,11 @@ const Recommendation = () => {
       return;
     }
 
-    const recommendations: RecommendData[] = res_data.data;
+    const recommendations: RecommendData[] = res_data.data.recommendations;
+    const next_page_token: string | undefined = res_data.data.next_page_token;
+
     setRecommendPlaces(recommendations);
+    setNextToken(next_page_token);
   };
 
   const onLocationSuccess = (position: GeolocationPosition) => {
@@ -69,6 +73,41 @@ const Recommendation = () => {
         break;
     }
   };
+
+  const requestForMore = async () => {
+    const data = {
+      latitude: 0,
+      longitude: 0,
+      token: nextToken,
+    };
+
+    const res = await fetch("/api/recommendation", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    const res_data = await res.json();
+    if (res_data.status !== 200) {
+      console.log(
+        `Received an error response from the server received status: ${res_data.status}`
+      );
+      return;
+    }
+
+    const recommendations: RecommendData[] = res_data.data.recommendations;
+    const next_page_token: string = res_data.data.next_page_token;
+    if (recommendPlaces !== null)
+      setRecommendPlaces([...recommendPlaces, ...recommendations]);
+    setNextToken(next_page_token);
+  };
+
+  const handleBtnClick = () => {
+    requestForMore();
+  };
+
   if (recommendPlaces === null) {
     return (
       <section className="mt-14">
@@ -86,6 +125,16 @@ const Recommendation = () => {
             />
           );
         })}
+        {nextToken !== undefined && (
+          <div className="w-1/2 h-12 flex justify-center items-center mb-6">
+            <button
+              className="border-2 border-black rounded-xl p-4"
+              onClick={handleBtnClick}
+            >
+              Load More
+            </button>
+          </div>
+        )}
       </section>
     );
   } else {
@@ -109,14 +158,18 @@ const RecommendationBlock = ({
   }, [recommendation]);
 
   return (
-    <div className="grid grid-cols-2 mb-8 w-1/2 border-4 border-black rounded-xl p-8">
+    <div
+      className={`${
+        imageUrl === "" ? "" : "grid grid-cols-2"
+      } mb-8 w-1/2 border-4 border-black rounded-xl p-8`}
+    >
       <div className="flex flex-col justify-center items-center">
         <h1 className="uppercase text-xl font-bold flex items-center justify-center">
           {recommendation.place_name}
         </h1>
         <div className="flex justify-center items-center">
           <ReactStars
-            counter={5}
+            count={5}
             value={recommendation.place_rating}
             edit={false}
             size={36}
@@ -126,13 +179,15 @@ const RecommendationBlock = ({
           Out of <strong>{recommendation.rating_amount}</strong> total ratings
         </h3>
       </div>
-      <div>
-        <img
-          src={`data:${recommendation.photo_type};base64,${imageUrl}`}
-          alt="Recommendation Image"
-          className="rounded-xl"
-        />
-      </div>
+      {recommendation.photo_buffer_str !== "" && (
+        <div>
+          <img
+            src={`data:${recommendation.photo_type};base64,${imageUrl}`}
+            alt="Recommendation Image"
+            className="rounded-xl"
+          />
+        </div>
+      )}
     </div>
   );
 };
