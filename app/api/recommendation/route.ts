@@ -9,7 +9,7 @@ export async function POST(req: NextRequest) {
   const location = `${latitude}%2C${longitude}`;
   const apiKey = process.env.PLACES_API_KEY;
   const token: string | undefined = inp_data.token;
-  const attractions_url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${location}&radius=5000&type=tourist_attraction&key=${apiKey}${
+  const attractions_url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${location}&radius=50000&type=tourist_attraction&key=${apiKey}${
     token === undefined ? "" : `&pagetoken=${token}`
   }`;
   const attractions_res = await fetch(attractions_url);
@@ -23,6 +23,7 @@ export async function POST(req: NextRequest) {
   }
 
   const attraction_results = attractions_data.results;
+
   const next_page_token: string | undefined = attractions_data.next_page_token;
 
   const data_promises: Promise<RecommendData>[] = attraction_results.map(
