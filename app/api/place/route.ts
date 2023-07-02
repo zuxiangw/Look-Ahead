@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import PlaceData from "@/app/interfaces/PlaceData";
 
-export default async function GET(req: NextRequest) {
+export async function GET(req: NextRequest) {
   const place_id: string | undefined | null =
     req.nextUrl.searchParams.get("place_id");
   if (place_id === undefined || place_id === null) {

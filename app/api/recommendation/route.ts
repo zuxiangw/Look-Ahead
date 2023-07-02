@@ -39,28 +39,19 @@ export async function POST(req: NextRequest) {
           place_name: place_name,
           place_rating: place_rating,
           rating_amount: rating_amount,
-          photo_type: "",
-          photo_buffer_str: "",
+          photo_reference: "",
         };
         return recommendObject;
       }
 
       const photo_reference: string = recommendation.photos[0].photo_reference;
-      const photo_res = await fetch(
-        `https://maps.googleapis.com/maps/api/place/photo?photo_reference=${photo_reference}&key=${apiKey}&maxwidth=400`
-      );
-
-      const photo_buffer_str: string = Buffer.from(
-        await (await photo_res.blob()).arrayBuffer()
-      ).toString("base64");
 
       const recommendObject: RecommendData = {
         place_id: place_id,
         place_name: place_name,
         place_rating: place_rating,
         rating_amount: rating_amount,
-        photo_type: photo_res.headers.get("content-type")!,
-        photo_buffer_str: photo_buffer_str,
+        photo_reference: photo_reference,
       };
 
       return recommendObject;

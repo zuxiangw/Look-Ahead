@@ -151,16 +151,10 @@ const RecommendationBlock = ({
 }: {
   recommendation: RecommendData;
 }) => {
-  const [imageUrl, setImageUrl] = useState<String>("");
-
-  useEffect(() => {
-    setImageUrl(recommendation.photo_buffer_str);
-  }, [recommendation]);
-
   return (
     <div
       className={`${
-        imageUrl === "" ? "" : "grid grid-cols-2"
+        recommendation.photo_reference === "" ? "" : "grid grid-cols-2"
       } mb-8 w-1/2 border-4 border-black rounded-xl p-8`}
     >
       <div className="flex flex-col justify-center items-center">
@@ -179,11 +173,11 @@ const RecommendationBlock = ({
           Out of <strong>{recommendation.rating_amount}</strong> total ratings
         </h3>
       </div>
-      {recommendation.photo_buffer_str !== "" && (
+      {recommendation.photo_reference !== "" && (
         <div>
           <img
-            src={`data:${recommendation.photo_type};base64,${imageUrl}`}
-            alt="Recommendation Image"
+            src={`/api/place-photo?photo_reference=${recommendation.photo_reference}`}
+            alt={recommendation.place_name}
             className="rounded-xl"
           />
         </div>
