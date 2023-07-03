@@ -4,15 +4,15 @@ export default interface PlaceData {
   phone: string;
   website: string;
   business_status: string;
-  open_now: boolean;
+  open_now: boolean | undefined;
   hours: string[];
   rating: number;
   rating_total: number;
-  photos: string[];
-  reviews: Review[];
+  photo_references: string[] | undefined;
+  reviews: Review[] | undefined;
 }
 
-interface Review {
+export interface Review {
   author_name: string;
   profile_url: string;
   rating: number;

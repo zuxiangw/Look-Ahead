@@ -46,10 +46,36 @@ const SearchBar = () => {
 
   return (
     <div className="flex flex-col items-center h-min mt-14">
+      <form className="w-search-bar" onSubmit={handleSearchBtn}>
+        <div className="relative">
+          <input
+            type="text"
+            className="h-12 px-5 w-full border-black border-2 rounded-full outline-0 pl-12"
+            onChange={handleTextChange}
+          />
+          <button
+            type="submit"
+            className="absolute left-0 top-0 h-full flex items-center justify-center px-4"
+          >
+            <BsSearch className="text-2xl" />
+          </button>
+        </div>
+      </form>
+      {searchInfo.length !== 0 && userInp.length !== 0 && (
+        <SearchResults results={searchInfo} />
+      )}
+    </div>
+  );
+};
+
+export default SearchBar;
+
+/*
+<div className="flex flex-col items-center h-min mt-14">
       <form className="w-3/4 grid grid-cols-7" onSubmit={handleSearchBtn}>
         <input
           type="text"
-          className="h-12 col-start-3 col-end-6 px-5 border-black border-2 rounded-full"
+          className="h-12 col-start-3 col-end-6 px-5 border-black border-2 rounded-full outline-0"
           onChange={handleTextChange}
         />
         <button type="submit" className="ml-8 col-start-6 col-end-7">
@@ -60,7 +86,4 @@ const SearchBar = () => {
         <SearchResults results={searchInfo} />
       )}
     </div>
-  );
-};
-
-export default SearchBar;
+*/
