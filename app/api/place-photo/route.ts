@@ -1,17 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
-  const photo_reference: string | undefined | null =
+  const photo_reference: string | null =
     req.nextUrl.searchParams.get("photo_reference");
-
-  if (photo_reference === undefined || photo_reference === null) {
+  if (photo_reference === null) {
     return NextResponse.json({
       status: 510,
-      message: "No Photo Reference Provided",
+      message: "Need to provide a reference, width and height of the photo",
     });
   }
-
-  console.log("Photo Reference: " + photo_reference);
 
   const apiKey = process.env.PLACES_API_KEY;
 
@@ -20,7 +17,7 @@ export async function GET(req: NextRequest) {
 
   try {
     photo_res = await fetch(
-      `https://maps.googleapis.com/maps/api/place/photo?photo_reference=${photo_reference}&key=${apiKey}&maxwidth=400`
+      `https://maps.googleapis.com/maps/api/place/photo?photo_reference=${photo_reference}&key=${apiKey}&maxwidth=800`
     );
 
     if (!photo_res.ok) {

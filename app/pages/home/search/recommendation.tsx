@@ -2,8 +2,7 @@
 
 import { useEffect, useState } from "react";
 import RecommendData from "@/app/interfaces/RecommendData";
-// @ts-ignore
-import ReactStars from "react-rating-stars-component";
+import PlaceRating from "@/app/components/placeRating";
 
 const Recommendation = () => {
   const [recommendPlaces, setRecommendPlaces] = useState<
@@ -161,17 +160,10 @@ const RecommendationBlock = ({
         <h1 className="uppercase text-xl font-bold flex items-center justify-center">
           {recommendation.place_name}
         </h1>
-        <div className="flex justify-center items-center">
-          <ReactStars
-            count={5}
-            value={recommendation.place_rating}
-            edit={false}
-            size={36}
-          />
-        </div>
-        <h3>
-          Out of <strong>{recommendation.rating_amount}</strong> total ratings
-        </h3>
+        <PlaceRating
+          rating={recommendation.place_rating}
+          amount={recommendation.rating_amount}
+        />
       </div>
       {recommendation.photo_reference !== "" && (
         <div>
