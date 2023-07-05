@@ -43,10 +43,13 @@ const SlideShow = ({ photo_references }: { photo_references: string[] }) => {
         <h1 className="text-4xl font-bold">Gallery</h1>
         <HeaderUnderbar />
         <div className="flex w-full justify-center items-center my-8">
-          <button className="text-3xl mx-6" onClick={prevClick}>
+          <button
+            className="text-5xl mx-6 hover:-translate-y-2 transition-transform"
+            onClick={prevClick}
+          >
             {"<"}
           </button>
-          <div className="grid grid-cols-3 h-search-hero w-4/5 p-8">
+          <div className="grid grid-cols-3 gap-x-1 h-search-hero w-4/5 p-8">
             <div
               className="relative w-4/5 h-4/5 my-auto ml-auto"
               id={"left_pic"}
@@ -78,7 +81,10 @@ const SlideShow = ({ photo_references }: { photo_references: string[] }) => {
               />
             </div>
           </div>
-          <button onClick={nextClick} className="text-3xl  mx-6">
+          <button
+            onClick={nextClick}
+            className="text-5xl  mx-6 hover:-translate-y-2 transition-transform"
+          >
             {">"}
           </button>
         </div>

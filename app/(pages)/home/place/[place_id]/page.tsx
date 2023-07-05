@@ -86,6 +86,14 @@ const Page = async ({ params }: { params: { place_id: string } }) => {
         amount={data.rating_total}
       />
       <SlideShow photo_references={data.photo_references} />
+      <BusinessInfo
+        address={data.address}
+        phone={data.phone}
+        website={data.website}
+        business_status={data.business_status}
+        open_now={data.open_now}
+        hours={data.hours}
+      />
     </section>
   );
 };
@@ -114,6 +122,136 @@ const NameAndRating = ({
     <section className="flex flex-col justify-center items-center text-center">
       <h1 className="text-6xl font-bold">{name}</h1>
       <PlaceRating rating={rating} amount={amount} />
+    </section>
+  );
+};
+
+import { BiMap } from "react-icons/bi";
+import { AiOutlinePhone } from "react-icons/ai";
+import { TfiWorld } from "react-icons/tfi";
+import { IoBusinessOutline } from "react-icons/io5";
+import { BsDoorClosed } from "react-icons/bs";
+import HeaderUnderbar from "@/app/components/headerUnderbar";
+const BusinessInfo = ({
+  address,
+  phone,
+  website,
+  business_status,
+  open_now,
+  hours,
+}: {
+  address: string;
+  phone: string;
+  website: string;
+  business_status: string;
+  open_now: boolean;
+  hours: string[];
+}) => {
+  const processed_hours: string[] = hours.map((hour: string) => {
+    return hour.split(" ").slice(1).join(" ");
+  });
+  return (
+    <section className="flex flex-col justify-center items-center text-center">
+      <h1 className="text-4xl font-bold">Business Info</h1>
+      <HeaderUnderbar />
+      <div className="grid grid-cols-5 w-full mt-8">
+        <section className="col-start-1 col-end-4">
+          <div className="flex items-center justify-center mb-8 grid grid-cols-8">
+            <div className="col-start-1 col-end-3 flex flex-col justify-center items-center">
+              <BiMap className="w-10 h-auto text-sky-500" />
+            </div>
+            <h1 className="text-2xl col-start-3 col-end-9 mr-auto">
+              {address}
+            </h1>
+          </div>
+          <div className="flex items-center justify-center mb-8 grid grid-cols-8">
+            <div className="col-start-1 col-end-3 mx-auto">
+              <AiOutlinePhone className="w-10 h-auto text-sky-500" />
+            </div>
+            <h1 className="text-2xl col-start-3 col-end-9 mr-auto">{phone}</h1>
+          </div>
+          <div className="flex items-center justify-center mb-8 grid grid-cols-8">
+            <div className="col-start-1 col-end-3 mx-auto">
+              <TfiWorld className="w-10 h-auto text-sky-500" />
+            </div>
+            <h1 className="text-2xl col-start-3 col-end-9 mr-auto">
+              {website}
+            </h1>
+          </div>
+          <div className="flex items-center justify-center mb-8 grid grid-cols-8">
+            <div className="col-start-1 col-end-3 mx-auto">
+              <IoBusinessOutline className="w-10 h-auto text-sky-500" />
+            </div>
+            <h1
+              className={`text-2xl col-start-3 col-end-9 mr-auto ${
+                business_status === "OPERATIONAL"
+                  ? "text-green-500"
+                  : business_status === "CLOSED_TEMPORARILY"
+                  ? "text-yellow-500"
+                  : "text-red-500"
+              }`}
+            >
+              {business_status.replace("_", " ")}
+            </h1>
+          </div>
+          <div className="flex items-center justify-center my-8 grid grid-cols-8">
+            <div className="col-start-1 col-end-3 mx-auto">
+              <BsDoorClosed className="w-10 h-auto text-sky-500" />
+            </div>
+            <h1
+              className={`text-2xl col-start-3 col-end-9 mr-auto ${
+                open_now ? "text-green-500" : "text-red-500"
+              }`}
+            >
+              {open_now ? "OPEN NOW" : "CLOSED"}
+            </h1>
+          </div>
+        </section>
+        <section className="col-start-4 col-end-6 grid grid-rows-7">
+          <div className="grid grid-cols-8 mb-4">
+            <h1 className="text-2xl col-start-1 col-end-3">MON:</h1>
+            <h1 className="text-2xl col-start-3 col-end-9 mr-auto">
+              {processed_hours[0]}
+            </h1>
+          </div>
+          <div className="grid grid-cols-8 mb-4">
+            <h1 className="text-2xl col-start-1 col-end-3">TUE:</h1>
+            <h1 className="text-2xl col-start-3 col-end-9 mr-auto">
+              {processed_hours[1]}
+            </h1>
+          </div>
+          <div className="grid grid-cols-8 mb-4">
+            <h1 className="text-2xl col-start-1 col-end-3">WED:</h1>
+            <h1 className="text-2xl col-start-3 col-end-9 mr-auto">
+              {processed_hours[2]}
+            </h1>
+          </div>
+          <div className="grid grid-cols-8 mb-4">
+            <h1 className="text-2xl col-start-1 col-end-3">THU:</h1>
+            <h1 className="text-2xl col-start-3 col-end-9 mr-auto">
+              {processed_hours[3]}
+            </h1>
+          </div>
+          <div className="grid grid-cols-8 mb-4">
+            <h1 className="text-2xl col-start-1 col-end-3">FRI:</h1>
+            <h1 className="text-2xl col-start-3 col-end-9 mr-auto">
+              {processed_hours[4]}
+            </h1>
+          </div>
+          <div className="grid grid-cols-8 mb-4">
+            <h1 className="text-2xl col-start-1 col-end-3">SAT:</h1>
+            <h1 className="text-2xl col-start-3 col-end-9 mr-auto">
+              {processed_hours[5]}
+            </h1>
+          </div>
+          <div className="grid grid-cols-8 mb-4">
+            <h1 className="text-2xl col-start-1 col-end-3">SUN:</h1>
+            <h1 className="text-2xl col-start-3 col-end-9 mr-auto">
+              {processed_hours[6]}
+            </h1>
+          </div>
+        </section>
+      </div>
     </section>
   );
 };
