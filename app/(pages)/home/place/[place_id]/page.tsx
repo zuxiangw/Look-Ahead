@@ -78,7 +78,6 @@ const example_data = {
 import SlideShow from "@/app/components/photoSlideshow";
 const Page = async ({ params }: { params: { place_id: string } }) => {
   const data = example_data.data;
-
   return (
     <section className="mt-8">
       <NameAndRating
@@ -112,8 +111,8 @@ const NameAndRating = ({
   amount: number;
 }) => {
   return (
-    <section className="flex flex-col justify-center items-center">
-      <h1 className="text-4xl font-bold">{name}</h1>
+    <section className="flex flex-col justify-center items-center text-center">
+      <h1 className="text-6xl font-bold">{name}</h1>
       <PlaceRating rating={rating} amount={amount} />
     </section>
   );
