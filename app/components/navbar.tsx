@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const NavBar = () => {
   return (
-    <div className="flex flex-row h-20 bg-white align-center justify-center border-b-4 border-black sticky top-0 z-50">
+    <div className="flex flex-row h-20 bg-white align-center justify-center border-b-4 border-black sticky top-0 z-50 mb-8">
       <Logo />
       <div className="flex my-auto">
         <p className="h-min text-3xl font-normal tracking-wider">Look Ahead</p>

@@ -94,6 +94,10 @@ const Page = async ({ params }: { params: { place_id: string } }) => {
         open_now={data.open_now}
         hours={data.hours}
       />
+      <Weather
+        current={weather_data.current}
+        forecast={weather_data.forecast.forecastday}
+      />
     </section>
   );
 };
@@ -252,6 +256,1077 @@ const BusinessInfo = ({
           </div>
         </section>
       </div>
+    </section>
+  );
+};
+
+const weather_data = {
+  location: {
+    name: "Great Neck",
+    region: "New York",
+    country: "United States of America",
+    lat: 40.76,
+    lon: -73.82,
+    tz_id: "America/New_York",
+    localtime_epoch: 1688929184,
+    localtime: "2023-07-09 14:59",
+  },
+  current: {
+    last_updated_epoch: 1688928300,
+    last_updated: "2023-07-09 14:45",
+    temp_c: 27.8,
+    temp_f: 82.0,
+    condition: {
+      text: "Partly cloudy",
+      icon: "//cdn.weatherapi.com/weather/64x64/day/116.png",
+      code: 1003,
+    },
+    wind_mph: 12.5,
+    wind_kph: 20.2,
+    precip_mm: 0.0,
+    precip_in: 0.0,
+    cloud: 75,
+    uv: 5.0,
+  },
+  forecast: {
+    forecastday: [
+      {
+        date: "2023-07-09",
+        date_epoch: 1688860800,
+        day: {
+          maxtemp_c: 28.5,
+          maxtemp_f: 83.3,
+          mintemp_c: 22.6,
+          mintemp_f: 72.7,
+          avgtemp_c: 25.1,
+          avgtemp_f: 77.1,
+          totalsnow_cm: 0.0,
+          condition: {
+            text: "Patchy rain possible",
+            icon: "//cdn.weatherapi.com/weather/64x64/day/176.png",
+            code: 1063,
+          },
+        },
+        astro: {},
+        hour: [
+          {
+            time_epoch: 1688875200,
+            time: "2023-07-09 00:00",
+            temp_c: 22.8,
+            temp_f: 73.0,
+            is_day: 0,
+            condition: {
+              text: "Mist",
+              icon: "//cdn.weatherapi.com/weather/64x64/night/143.png",
+              code: 1030,
+            },
+          },
+          {
+            time_epoch: 1688878800,
+            time: "2023-07-09 01:00",
+            temp_c: 22.6,
+            temp_f: 72.7,
+            is_day: 0,
+            condition: {
+              text: "Mist",
+              icon: "//cdn.weatherapi.com/weather/64x64/night/143.png",
+              code: 1030,
+            },
+          },
+          {
+            time_epoch: 1688882400,
+            time: "2023-07-09 02:00",
+            temp_c: 22.6,
+            temp_f: 72.7,
+            is_day: 0,
+            condition: {
+              text: "Mist",
+              icon: "//cdn.weatherapi.com/weather/64x64/night/143.png",
+              code: 1030,
+            },
+          },
+          {
+            time_epoch: 1688886000,
+            time: "2023-07-09 03:00",
+            temp_c: 22.7,
+            temp_f: 72.9,
+            is_day: 0,
+            condition: {
+              text: "Mist",
+              icon: "//cdn.weatherapi.com/weather/64x64/night/143.png",
+              code: 1030,
+            },
+          },
+          {
+            time_epoch: 1688889600,
+            time: "2023-07-09 04:00",
+            temp_c: 22.8,
+            temp_f: 73.0,
+            is_day: 0,
+            condition: {
+              text: "Mist",
+              icon: "//cdn.weatherapi.com/weather/64x64/night/143.png",
+              code: 1030,
+            },
+          },
+          {
+            time_epoch: 1688893200,
+            time: "2023-07-09 05:00",
+            temp_c: 23.1,
+            temp_f: 73.6,
+            is_day: 0,
+            condition: {
+              text: "Mist",
+              icon: "//cdn.weatherapi.com/weather/64x64/night/143.png",
+              code: 1030,
+            },
+          },
+          {
+            time_epoch: 1688896800,
+            time: "2023-07-09 06:00",
+            temp_c: 23.3,
+            temp_f: 73.9,
+            is_day: 1,
+            condition: {
+              text: "Overcast",
+              icon: "//cdn.weatherapi.com/weather/64x64/day/122.png",
+              code: 1009,
+            },
+          },
+          {
+            time_epoch: 1688900400,
+            time: "2023-07-09 07:00",
+            temp_c: 23.5,
+            temp_f: 74.3,
+            is_day: 1,
+            condition: {
+              text: "Overcast",
+              icon: "//cdn.weatherapi.com/weather/64x64/day/122.png",
+              code: 1009,
+            },
+          },
+          {
+            time_epoch: 1688904000,
+            time: "2023-07-09 08:00",
+            temp_c: 23.8,
+            temp_f: 74.8,
+            is_day: 1,
+            condition: {
+              text: "Overcast",
+              icon: "//cdn.weatherapi.com/weather/64x64/day/122.png",
+              code: 1009,
+            },
+          },
+          {
+            time_epoch: 1688907600,
+            time: "2023-07-09 09:00",
+            temp_c: 24.0,
+            temp_f: 75.2,
+            is_day: 1,
+            condition: {
+              text: "Overcast",
+              icon: "//cdn.weatherapi.com/weather/64x64/day/122.png",
+              code: 1009,
+            },
+          },
+          {
+            time_epoch: 1688911200,
+            time: "2023-07-09 10:00",
+            temp_c: 24.4,
+            temp_f: 75.9,
+            is_day: 1,
+            condition: {
+              text: "Overcast",
+              icon: "//cdn.weatherapi.com/weather/64x64/day/122.png",
+              code: 1009,
+            },
+          },
+          {
+            time_epoch: 1688914800,
+            time: "2023-07-09 11:00",
+            temp_c: 24.6,
+            temp_f: 76.3,
+            is_day: 1,
+            condition: {
+              text: "Overcast",
+              icon: "//cdn.weatherapi.com/weather/64x64/day/122.png",
+              code: 1009,
+            },
+          },
+          {
+            time_epoch: 1688918400,
+            time: "2023-07-09 12:00",
+            temp_c: 24.7,
+            temp_f: 76.5,
+            is_day: 1,
+            condition: {
+              text: "Overcast",
+              icon: "//cdn.weatherapi.com/weather/64x64/day/122.png",
+              code: 1009,
+            },
+          },
+          {
+            time_epoch: 1688922000,
+            time: "2023-07-09 13:00",
+            temp_c: 24.7,
+            temp_f: 76.5,
+            is_day: 1,
+            condition: {
+              text: "Overcast",
+              icon: "//cdn.weatherapi.com/weather/64x64/day/122.png",
+              code: 1009,
+            },
+          },
+          {
+            time_epoch: 1688925600,
+            time: "2023-07-09 14:00",
+            temp_c: 24.6,
+            temp_f: 76.3,
+            is_day: 1,
+            condition: {
+              text: "Overcast",
+              icon: "//cdn.weatherapi.com/weather/64x64/day/122.png",
+              code: 1009,
+            },
+          },
+          {
+            time_epoch: 1688929200,
+            time: "2023-07-09 15:00",
+            temp_c: 25.2,
+            temp_f: 77.4,
+            is_day: 1,
+            condition: {
+              text: "Overcast",
+              icon: "//cdn.weatherapi.com/weather/64x64/day/122.png",
+              code: 1009,
+            },
+          },
+          {
+            time_epoch: 1688932800,
+            time: "2023-07-09 16:00",
+            temp_c: 24.2,
+            temp_f: 75.6,
+            is_day: 1,
+            condition: {
+              text: "Overcast",
+              icon: "//cdn.weatherapi.com/weather/64x64/day/122.png",
+              code: 1009,
+            },
+          },
+          {
+            time_epoch: 1688936400,
+            time: "2023-07-09 17:00",
+            temp_c: 24.7,
+            temp_f: 76.5,
+            is_day: 1,
+            condition: {
+              text: "Overcast",
+              icon: "//cdn.weatherapi.com/weather/64x64/day/122.png",
+              code: 1009,
+            },
+          },
+          {
+            time_epoch: 1688940000,
+            time: "2023-07-09 18:00",
+            temp_c: 24.3,
+            temp_f: 75.7,
+            is_day: 1,
+            condition: {
+              text: "Overcast",
+              icon: "//cdn.weatherapi.com/weather/64x64/day/122.png",
+              code: 1009,
+            },
+          },
+          {
+            time_epoch: 1688943600,
+            time: "2023-07-09 19:00",
+            temp_c: 24.3,
+            temp_f: 75.7,
+            is_day: 1,
+            condition: {
+              text: "Overcast",
+              icon: "//cdn.weatherapi.com/weather/64x64/day/122.png",
+              code: 1009,
+            },
+          },
+          {
+            time_epoch: 1688947200,
+            time: "2023-07-09 20:00",
+            temp_c: 23.2,
+            temp_f: 73.8,
+            is_day: 1,
+            condition: {
+              text: "Overcast",
+              icon: "//cdn.weatherapi.com/weather/64x64/day/122.png",
+              code: 1009,
+            },
+          },
+          {
+            time_epoch: 1688950800,
+            time: "2023-07-09 21:00",
+            temp_c: 23.7,
+            temp_f: 74.7,
+            is_day: 0,
+            condition: {
+              text: "Mist",
+              icon: "//cdn.weatherapi.com/weather/64x64/night/143.png",
+              code: 1030,
+            },
+          },
+          {
+            time_epoch: 1688954400,
+            time: "2023-07-09 22:00",
+            temp_c: 23.5,
+            temp_f: 74.3,
+            is_day: 0,
+            condition: {
+              text: "Overcast",
+              icon: "//cdn.weatherapi.com/weather/64x64/night/122.png",
+              code: 1009,
+            },
+          },
+          {
+            time_epoch: 1688958000,
+            time: "2023-07-09 23:00",
+            temp_c: 23.6,
+            temp_f: 74.5,
+            is_day: 0,
+            condition: {
+              text: "Overcast",
+              icon: "//cdn.weatherapi.com/weather/64x64/night/122.png",
+              code: 1009,
+            },
+          },
+        ],
+      },
+      {
+        date: "2023-07-10",
+        date_epoch: 1688947200,
+        day: {
+          maxtemp_c: 30.2,
+          maxtemp_f: 86.4,
+          mintemp_c: 21.1,
+          mintemp_f: 70.0,
+          avgtemp_c: 25.2,
+          avgtemp_f: 77.3,
+          totalsnow_cm: 0.0,
+          condition: {
+            text: "Heavy rain",
+            icon: "//cdn.weatherapi.com/weather/64x64/day/308.png",
+            code: 1195,
+          },
+        },
+        astro: {},
+        hour: [
+          {
+            time_epoch: 1688961600,
+            time: "2023-07-10 00:00",
+            temp_c: 23.3,
+            temp_f: 73.9,
+            is_day: 0,
+            condition: {
+              text: "Overcast",
+              icon: "//cdn.weatherapi.com/weather/64x64/night/122.png",
+              code: 1009,
+            },
+          },
+          {
+            time_epoch: 1688965200,
+            time: "2023-07-10 01:00",
+            temp_c: 23.4,
+            temp_f: 74.1,
+            is_day: 0,
+            condition: {
+              text: "Overcast",
+              icon: "//cdn.weatherapi.com/weather/64x64/night/122.png",
+              code: 1009,
+            },
+          },
+          {
+            time_epoch: 1688968800,
+            time: "2023-07-10 02:00",
+            temp_c: 23.5,
+            temp_f: 74.3,
+            is_day: 0,
+            condition: {
+              text: "Moderate or heavy rain shower",
+              icon: "//cdn.weatherapi.com/weather/64x64/night/356.png",
+              code: 1243,
+            },
+          },
+          {
+            time_epoch: 1688972400,
+            time: "2023-07-10 03:00",
+            temp_c: 22.7,
+            temp_f: 72.9,
+            is_day: 0,
+            condition: {
+              text: "Patchy rain possible",
+              icon: "//cdn.weatherapi.com/weather/64x64/night/176.png",
+              code: 1063,
+            },
+          },
+          {
+            time_epoch: 1688976000,
+            time: "2023-07-10 04:00",
+            temp_c: 22.6,
+            temp_f: 72.7,
+            is_day: 0,
+            condition: {
+              text: "Patchy rain possible",
+              icon: "//cdn.weatherapi.com/weather/64x64/night/176.png",
+              code: 1063,
+            },
+          },
+          {
+            time_epoch: 1688979600,
+            time: "2023-07-10 05:00",
+            temp_c: 23.0,
+            temp_f: 73.4,
+            is_day: 0,
+            condition: {
+              text: "Overcast",
+              icon: "//cdn.weatherapi.com/weather/64x64/night/122.png",
+              code: 1009,
+            },
+          },
+          {
+            time_epoch: 1688983200,
+            time: "2023-07-10 06:00",
+            temp_c: 22.3,
+            temp_f: 72.1,
+            is_day: 1,
+            condition: {
+              text: "Light rain shower",
+              icon: "//cdn.weatherapi.com/weather/64x64/day/353.png",
+              code: 1240,
+            },
+          },
+          {
+            time_epoch: 1688986800,
+            time: "2023-07-10 07:00",
+            temp_c: 22.6,
+            temp_f: 72.7,
+            is_day: 1,
+            condition: {
+              text: "Patchy rain possible",
+              icon: "//cdn.weatherapi.com/weather/64x64/day/176.png",
+              code: 1063,
+            },
+          },
+          {
+            time_epoch: 1688990400,
+            time: "2023-07-10 08:00",
+            temp_c: 22.7,
+            temp_f: 72.9,
+            is_day: 1,
+            condition: {
+              text: "Cloudy",
+              icon: "//cdn.weatherapi.com/weather/64x64/day/119.png",
+              code: 1006,
+            },
+          },
+          {
+            time_epoch: 1688994000,
+            time: "2023-07-10 09:00",
+            temp_c: 23.8,
+            temp_f: 74.8,
+            is_day: 1,
+            condition: {
+              text: "Patchy rain possible",
+              icon: "//cdn.weatherapi.com/weather/64x64/day/176.png",
+              code: 1063,
+            },
+          },
+          {
+            time_epoch: 1688997600,
+            time: "2023-07-10 10:00",
+            temp_c: 24.9,
+            temp_f: 76.8,
+            is_day: 1,
+            condition: {
+              text: "Patchy rain possible",
+              icon: "//cdn.weatherapi.com/weather/64x64/day/176.png",
+              code: 1063,
+            },
+          },
+          {
+            time_epoch: 1689001200,
+            time: "2023-07-10 11:00",
+            temp_c: 29.7,
+            temp_f: 85.5,
+            is_day: 1,
+            condition: {
+              text: "Sunny",
+              icon: "//cdn.weatherapi.com/weather/64x64/day/113.png",
+              code: 1000,
+            },
+          },
+          {
+            time_epoch: 1689004800,
+            time: "2023-07-10 12:00",
+            temp_c: 26.5,
+            temp_f: 79.7,
+            is_day: 1,
+            condition: {
+              text: "Light rain shower",
+              icon: "//cdn.weatherapi.com/weather/64x64/day/353.png",
+              code: 1240,
+            },
+          },
+          {
+            time_epoch: 1689008400,
+            time: "2023-07-10 13:00",
+            temp_c: 25.9,
+            temp_f: 78.6,
+            is_day: 1,
+            condition: {
+              text: "Light rain shower",
+              icon: "//cdn.weatherapi.com/weather/64x64/day/353.png",
+              code: 1240,
+            },
+          },
+          {
+            time_epoch: 1689012000,
+            time: "2023-07-10 14:00",
+            temp_c: 29.2,
+            temp_f: 84.6,
+            is_day: 1,
+            condition: {
+              text: "Overcast",
+              icon: "//cdn.weatherapi.com/weather/64x64/day/122.png",
+              code: 1009,
+            },
+          },
+          {
+            time_epoch: 1689015600,
+            time: "2023-07-10 15:00",
+            temp_c: 25.4,
+            temp_f: 77.7,
+            is_day: 1,
+            condition: {
+              text: "Light rain shower",
+              icon: "//cdn.weatherapi.com/weather/64x64/day/353.png",
+              code: 1240,
+            },
+          },
+          {
+            time_epoch: 1689019200,
+            time: "2023-07-10 16:00",
+            temp_c: 23.2,
+            temp_f: 73.8,
+            is_day: 1,
+            condition: {
+              text: "Light rain shower",
+              icon: "//cdn.weatherapi.com/weather/64x64/day/353.png",
+              code: 1240,
+            },
+          },
+          {
+            time_epoch: 1689022800,
+            time: "2023-07-10 17:00",
+            temp_c: 30.2,
+            temp_f: 86.4,
+            is_day: 1,
+            condition: {
+              text: "Partly cloudy",
+              icon: "//cdn.weatherapi.com/weather/64x64/day/116.png",
+              code: 1003,
+            },
+          },
+          {
+            time_epoch: 1689026400,
+            time: "2023-07-10 18:00",
+            temp_c: 24.4,
+            temp_f: 75.9,
+            is_day: 1,
+            condition: {
+              text: "Patchy rain possible",
+              icon: "//cdn.weatherapi.com/weather/64x64/day/176.png",
+              code: 1063,
+            },
+          },
+          {
+            time_epoch: 1689030000,
+            time: "2023-07-10 19:00",
+            temp_c: 25.3,
+            temp_f: 77.5,
+            is_day: 1,
+            condition: {
+              text: "Patchy rain possible",
+              icon: "//cdn.weatherapi.com/weather/64x64/day/176.png",
+              code: 1063,
+            },
+          },
+          {
+            time_epoch: 1689033600,
+            time: "2023-07-10 20:00",
+            temp_c: 29.0,
+            temp_f: 84.2,
+            is_day: 1,
+            condition: {
+              text: "Overcast",
+              icon: "//cdn.weatherapi.com/weather/64x64/day/122.png",
+              code: 1009,
+            },
+          },
+          {
+            time_epoch: 1689037200,
+            time: "2023-07-10 21:00",
+            temp_c: 20.9,
+            temp_f: 69.6,
+            is_day: 0,
+            condition: {
+              text: "Clear",
+              icon: "//cdn.weatherapi.com/weather/64x64/night/113.png",
+              code: 1000,
+            },
+          },
+          {
+            time_epoch: 1689040800,
+            time: "2023-07-10 22:00",
+            temp_c: 20.0,
+            temp_f: 68.0,
+            is_day: 0,
+            condition: {
+              text: "Clear",
+              icon: "//cdn.weatherapi.com/weather/64x64/night/113.png",
+              code: 1000,
+            },
+          },
+          {
+            time_epoch: 1689044400,
+            time: "2023-07-10 23:00",
+            temp_c: 26.3,
+            temp_f: 79.3,
+            is_day: 0,
+            condition: {
+              text: "Clear",
+              icon: "//cdn.weatherapi.com/weather/64x64/night/113.png",
+              code: 1000,
+            },
+          },
+        ],
+      },
+      {
+        date: "2023-07-11",
+        date_epoch: 1689033600,
+        day: {
+          maxtemp_c: 33.4,
+          maxtemp_f: 92.1,
+          mintemp_c: 18.8,
+          mintemp_f: 65.8,
+          avgtemp_c: 25.9,
+          avgtemp_f: 78.6,
+          totalsnow_cm: 0.0,
+          condition: {
+            text: "Partly cloudy",
+            icon: "//cdn.weatherapi.com/weather/64x64/day/116.png",
+            code: 1003,
+          },
+        },
+        astro: {},
+        hour: [
+          {
+            time_epoch: 1689048000,
+            time: "2023-07-11 00:00",
+            temp_c: 18.8,
+            temp_f: 65.8,
+            is_day: 0,
+            condition: {
+              text: "Partly cloudy",
+              icon: "//cdn.weatherapi.com/weather/64x64/night/116.png",
+              code: 1003,
+            },
+          },
+          {
+            time_epoch: 1689051600,
+            time: "2023-07-11 01:00",
+            temp_c: 18.1,
+            temp_f: 64.6,
+            is_day: 0,
+            condition: {
+              text: "Patchy rain possible",
+              icon: "//cdn.weatherapi.com/weather/64x64/night/176.png",
+              code: 1063,
+            },
+          },
+          {
+            time_epoch: 1689055200,
+            time: "2023-07-11 02:00",
+            temp_c: 24.3,
+            temp_f: 75.7,
+            is_day: 0,
+            condition: {
+              text: "Partly cloudy",
+              icon: "//cdn.weatherapi.com/weather/64x64/night/116.png",
+              code: 1003,
+            },
+          },
+          {
+            time_epoch: 1689058800,
+            time: "2023-07-11 03:00",
+            temp_c: 19.1,
+            temp_f: 66.4,
+            is_day: 0,
+            condition: {
+              text: "Cloudy",
+              icon: "//cdn.weatherapi.com/weather/64x64/night/119.png",
+              code: 1006,
+            },
+          },
+          {
+            time_epoch: 1689062400,
+            time: "2023-07-11 04:00",
+            temp_c: 19.6,
+            temp_f: 67.3,
+            is_day: 0,
+            condition: {
+              text: "Overcast",
+              icon: "//cdn.weatherapi.com/weather/64x64/night/122.png",
+              code: 1009,
+            },
+          },
+          {
+            time_epoch: 1689066000,
+            time: "2023-07-11 05:00",
+            temp_c: 22.7,
+            temp_f: 72.9,
+            is_day: 0,
+            condition: {
+              text: "Clear",
+              icon: "//cdn.weatherapi.com/weather/64x64/night/113.png",
+              code: 1000,
+            },
+          },
+          {
+            time_epoch: 1689069600,
+            time: "2023-07-11 06:00",
+            temp_c: 20.5,
+            temp_f: 68.9,
+            is_day: 1,
+            condition: {
+              text: "Cloudy",
+              icon: "//cdn.weatherapi.com/weather/64x64/day/119.png",
+              code: 1006,
+            },
+          },
+          {
+            time_epoch: 1689073200,
+            time: "2023-07-11 07:00",
+            temp_c: 20.7,
+            temp_f: 69.3,
+            is_day: 1,
+            condition: {
+              text: "Partly cloudy",
+              icon: "//cdn.weatherapi.com/weather/64x64/day/116.png",
+              code: 1003,
+            },
+          },
+          {
+            time_epoch: 1689076800,
+            time: "2023-07-11 08:00",
+            temp_c: 24.6,
+            temp_f: 76.3,
+            is_day: 1,
+            condition: {
+              text: "Sunny",
+              icon: "//cdn.weatherapi.com/weather/64x64/day/113.png",
+              code: 1000,
+            },
+          },
+          {
+            time_epoch: 1689080400,
+            time: "2023-07-11 09:00",
+            temp_c: 22.7,
+            temp_f: 72.9,
+            is_day: 1,
+            condition: {
+              text: "Sunny",
+              icon: "//cdn.weatherapi.com/weather/64x64/day/113.png",
+              code: 1000,
+            },
+          },
+          {
+            time_epoch: 1689084000,
+            time: "2023-07-11 10:00",
+            temp_c: 26.0,
+            temp_f: 78.8,
+            is_day: 1,
+            condition: {
+              text: "Sunny",
+              icon: "//cdn.weatherapi.com/weather/64x64/day/113.png",
+              code: 1000,
+            },
+          },
+          {
+            time_epoch: 1689087600,
+            time: "2023-07-11 11:00",
+            temp_c: 30.5,
+            temp_f: 86.9,
+            is_day: 1,
+            condition: {
+              text: "Sunny",
+              icon: "//cdn.weatherapi.com/weather/64x64/day/113.png",
+              code: 1000,
+            },
+          },
+          {
+            time_epoch: 1689091200,
+            time: "2023-07-11 12:00",
+            temp_c: 30.7,
+            temp_f: 87.3,
+            is_day: 1,
+            condition: {
+              text: "Sunny",
+              icon: "//cdn.weatherapi.com/weather/64x64/day/113.png",
+              code: 1000,
+            },
+          },
+          {
+            time_epoch: 1689094800,
+            time: "2023-07-11 13:00",
+            temp_c: 31.6,
+            temp_f: 88.9,
+            is_day: 1,
+            condition: {
+              text: "Partly cloudy",
+              icon: "//cdn.weatherapi.com/weather/64x64/day/116.png",
+              code: 1003,
+            },
+          },
+          {
+            time_epoch: 1689098400,
+            time: "2023-07-11 14:00",
+            temp_c: 33.2,
+            temp_f: 91.8,
+            is_day: 1,
+            condition: {
+              text: "Sunny",
+              icon: "//cdn.weatherapi.com/weather/64x64/day/113.png",
+              code: 1000,
+            },
+          },
+          {
+            time_epoch: 1689102000,
+            time: "2023-07-11 15:00",
+            temp_c: 33.0,
+            temp_f: 91.4,
+            is_day: 1,
+            condition: {
+              text: "Partly cloudy",
+              icon: "//cdn.weatherapi.com/weather/64x64/day/116.png",
+              code: 1003,
+            },
+          },
+          {
+            time_epoch: 1689105600,
+            time: "2023-07-11 16:00",
+            temp_c: 31.6,
+            temp_f: 88.9,
+            is_day: 1,
+            condition: {
+              text: "Partly cloudy",
+              icon: "//cdn.weatherapi.com/weather/64x64/day/116.png",
+              code: 1003,
+            },
+          },
+          {
+            time_epoch: 1689109200,
+            time: "2023-07-11 17:00",
+            temp_c: 33.2,
+            temp_f: 91.8,
+            is_day: 1,
+            condition: {
+              text: "Sunny",
+              icon: "//cdn.weatherapi.com/weather/64x64/day/113.png",
+              code: 1000,
+            },
+          },
+          {
+            time_epoch: 1689112800,
+            time: "2023-07-11 18:00",
+            temp_c: 31.4,
+            temp_f: 88.5,
+            is_day: 1,
+            condition: {
+              text: "Partly cloudy",
+              icon: "//cdn.weatherapi.com/weather/64x64/day/116.png",
+              code: 1003,
+            },
+          },
+          {
+            time_epoch: 1689116400,
+            time: "2023-07-11 19:00",
+            temp_c: 30.2,
+            temp_f: 86.4,
+            is_day: 1,
+            condition: {
+              text: "Partly cloudy",
+              icon: "//cdn.weatherapi.com/weather/64x64/day/116.png",
+              code: 1003,
+            },
+          },
+          {
+            time_epoch: 1689120000,
+            time: "2023-07-11 20:00",
+            temp_c: 28.3,
+            temp_f: 82.9,
+            is_day: 1,
+            condition: {
+              text: "Sunny",
+              icon: "//cdn.weatherapi.com/weather/64x64/day/113.png",
+              code: 1000,
+            },
+          },
+          {
+            time_epoch: 1689123600,
+            time: "2023-07-11 21:00",
+            temp_c: 28.0,
+            temp_f: 82.4,
+            is_day: 0,
+            condition: {
+              text: "Clear",
+              icon: "//cdn.weatherapi.com/weather/64x64/night/113.png",
+              code: 1000,
+            },
+          },
+          {
+            time_epoch: 1689127200,
+            time: "2023-07-11 22:00",
+            temp_c: 27.3,
+            temp_f: 81.1,
+            is_day: 0,
+            condition: {
+              text: "Clear",
+              icon: "//cdn.weatherapi.com/weather/64x64/night/113.png",
+              code: 1000,
+            },
+          },
+          {
+            time_epoch: 1689130800,
+            time: "2023-07-11 23:00",
+            temp_c: 24.4,
+            temp_f: 75.9,
+            is_day: 0,
+            condition: {
+              text: "Clear",
+              icon: "//cdn.weatherapi.com/weather/64x64/night/113.png",
+              code: 1000,
+            },
+          },
+        ],
+      },
+    ],
+  },
+};
+
+const Weather = ({ current, forecast }: any) => {
+  return (
+    <section className="text-center mt-8 flex flex-col items-center">
+      <div>
+        <h1 className="text-4xl font-bold">Weather</h1>
+        <HeaderUnderbar />
+      </div>
+      <CurrentWeather current={current} />
+      <FutureWeather forecast={forecast} />
+    </section>
+  );
+};
+
+import Image from "next/image";
+import ExchangingMeasurements from "@/app/components/exchangingMeasurements";
+const CurrentWeather = ({ current }: any) => {
+  const currentTime: string = current.last_updated.split(" ")[1];
+
+  return (
+    <section className="mt-4 bg-sky-300 w-[38rem] rounded-xl">
+      <div className="text-3xl font-bold my-4">Now</div>
+      <div>
+        <h1 className="text-4xl font-bold w-min p-4 bg-white mx-auto rounded-xl">
+          {currentTime}
+        </h1>
+      </div>
+      <div className="flex items-center justify-center">
+        <h1 className="text-3xl capitalize font-bold">
+          {current.condition.text}
+        </h1>
+        <div className="relative h-16 w-16">
+          <Image
+            src={`/api/weather-icon-photo?url=${current.condition.icon}`}
+            alt={current.condition.text}
+            fill={true}
+          />
+        </div>
+      </div>
+      <div>
+        <ExchangingMeasurements
+          m1_val={current.temp_c}
+          m2_val={current.temp_f}
+          m1_text="C"
+          m2_text="F"
+          description="Temperature Now"
+          isTemp={true}
+        />
+      </div>
+      <div className="mt-2">
+        <ExchangingMeasurements
+          m1_val={current.wind_mph}
+          m2_val={current.wind_kph}
+          m1_text="MPH"
+          m2_text="KPH"
+          description="Wind Speed"
+          isTemp={false}
+        />
+      </div>
+      <div className="mt-2">
+        <ExchangingMeasurements
+          m1_val={current.precip_mm}
+          m2_val={current.precip_in}
+          m1_text="mm"
+          m2_text="in"
+          description="Precipitation Level"
+          isTemp={false}
+        />
+      </div>
+      <div className="text-2xl mt-2">
+        <div className="text-2xl grid grid-cols-10 px-4">
+          <div className="col-start-2 col-end-6 flex justify-center mr-auto">
+            Cloud Coverage:
+          </div>
+          <div className="col-start-7 col-end-8">
+            <strong>{current.cloud}%</strong>
+          </div>
+        </div>
+      </div>
+      <div className="text-2xl mt-2 mb-8">
+        <div className="text-2xl grid grid-cols-10 px-4">
+          <div className="col-start-2 col-end-6 flex justify-center mr-auto">
+            UV Index:
+          </div>
+          <div className="col-start-7 col-end-8">
+            <strong>{current.uv}</strong>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+import DayForecast from "@/app/components/dayForecast";
+const FutureWeather = ({ forecast }: any) => {
+  return (
+    <section className="flex mt-8">
+      {forecast.map((day: any) => {
+        return (
+          <div
+            key={day.date_epoch}
+            className="mx-8 w-[30rem] bg-sky-300 rounded-xl"
+          >
+            <DayForecast day={day} />
+          </div>
+        );
+      })}
     </section>
   );
 };
