@@ -75,11 +75,11 @@ const example_data = {
   },
 };
 
-import SlideShow from "@/app/components/photoSlideshow";
+import SlideShow from "@/app/components/placeComponents/photoSlideshow";
 const Page = async ({ params }: { params: { place_id: string } }) => {
   const data = example_data.data;
   return (
-    <section className="mt-8">
+    <section className="mt-8" id="main-page">
       <NameAndRating
         name={data.place_name}
         rating={data.rating}
@@ -155,7 +155,7 @@ const BusinessInfo = ({
     return hour.split(" ").slice(1).join(" ");
   });
   return (
-    <section className="flex flex-col justify-center items-center text-center">
+    <section className="flex flex-col justify-center items-center text-center mt-16">
       <h1 className="text-4xl font-bold">Business Info</h1>
       <HeaderUnderbar />
       <div className="grid grid-cols-5 w-full mt-8">
@@ -1223,7 +1223,7 @@ const weather_data = {
 
 const Weather = ({ current, forecast }: any) => {
   return (
-    <section className="text-center mt-8 flex flex-col items-center">
+    <section className="text-center mt-16 flex flex-col items-center">
       <div>
         <h1 className="text-4xl font-bold">Weather</h1>
         <HeaderUnderbar />
@@ -1235,12 +1235,12 @@ const Weather = ({ current, forecast }: any) => {
 };
 
 import Image from "next/image";
-import ExchangingMeasurements from "@/app/components/exchangingMeasurements";
+import ExchangingMeasurements from "@/app/components/placeComponents/DayForecast/exchangingMeasurements";
 const CurrentWeather = ({ current }: any) => {
   const currentTime: string = current.last_updated.split(" ")[1];
 
   return (
-    <section className="mt-4 bg-sky-300 w-[38rem] rounded-xl">
+    <section className="mt-8 bg-sky-300 w-[38rem] rounded-xl">
       <div className="text-3xl font-bold my-4">Now</div>
       <div>
         <h1 className="text-4xl font-bold w-min p-4 bg-white mx-auto rounded-xl">
@@ -1313,16 +1313,13 @@ const CurrentWeather = ({ current }: any) => {
   );
 };
 
-import DayForecast from "@/app/components/dayForecast";
+import DayForecast from "@/app/components/placeComponents/DayForecast/dayForecast";
 const FutureWeather = ({ forecast }: any) => {
   return (
-    <section className="flex mt-8">
+    <section className="flex mt-8 w-full overflow-x-scroll p-4 pb-0">
       {forecast.map((day: any) => {
         return (
-          <div
-            key={day.date_epoch}
-            className="mx-8 w-[30rem] bg-sky-300 rounded-xl"
-          >
+          <div key={day.date_epoch} className="mr-8 w-[30rem]">
             <DayForecast day={day} />
           </div>
         );

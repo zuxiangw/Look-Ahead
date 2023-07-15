@@ -17,7 +17,7 @@ const DayForecastTemp = ({ day }: any) => {
   };
 
   return (
-    <div>
+    <div className="bg-sky-300 rounded-xl p-2 my-4">
       <div className="grid grid-cols-10 my-4">
         <div className="col-start-2 col-end-4">
           <HeaderTemp
@@ -52,7 +52,7 @@ const DayForecastTemp = ({ day }: any) => {
           {!isCelsius && <div>F</div>}
         </button>
       </div>
-      <div className="grid grid-cols-[24] grid-flow-col overflow-x-scroll border-2 border-black">
+      <div className="grid grid-cols-[24] grid-flow-col overflow-x-scroll border-2 border-black rounded-xl">
         {day.hour.map((hour: any) => {
           return (
             <HourTemp
@@ -103,7 +103,7 @@ const HourTemp = ({
   isCelsius: boolean;
 }) => {
   return (
-    <div className="w-36">
+    <div className="w-36 p-2">
       <div>{hour}</div>
       <div className="flex flex-col items-center justify-center">
         <div className="relative h-16 w-16">
