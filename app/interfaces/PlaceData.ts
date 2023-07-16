@@ -1,14 +1,14 @@
 export default interface PlaceData {
-  place_name: string;
-  address: string;
-  phone: string;
-  website: string;
-  business_status: string;
+  place_name: string | undefined;
+  address: string | undefined;
+  phone: string | undefined;
+  website: string | undefined;
+  business_status: string | undefined;
   open_now: boolean | undefined;
-  hours: string[];
-  rating: number;
-  rating_total: number;
-  location: { lat: number | undefined; lon: number | undefined };
+  hours: string[] | undefined;
+  rating: number | undefined;
+  rating_total: number | undefined;
+  location: { lat: number; lon: number } | undefined;
   photo_references: string[] | undefined;
   reviews: Review[] | undefined;
 }

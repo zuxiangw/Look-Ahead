@@ -35,11 +35,14 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ status: 510, message: "No Results found" });
   }
 
-  const place_name: string = place_result.name ?? "";
-  const address: string = place_result.formatted_address ?? "";
-  const phone: string = place_result.formatted_phone_number ?? "";
-  const website: string = place_result.website ?? "";
-  const business_status: string = place_result.business_status ?? "";
+  const place_name: string | undefined = place_result.name ?? undefined;
+  const address: string | undefined =
+    place_result.formatted_address ?? undefined;
+  const phone: string | undefined =
+    place_result.formatted_phone_number ?? undefined;
+  const website: string | undefined = place_result.website ?? undefined;
+  const business_status: string | undefined =
+    place_result.business_status ?? undefined;
   const open_now: boolean | undefined =
     place_result.opening_hours === undefined
       ? undefined
@@ -48,8 +51,9 @@ export async function GET(req: NextRequest) {
     place_result.opening_hours === undefined
       ? ""
       : place_result.opening_hours.weekday_text ?? "";
-  const rating: number = place_result.rating ?? NaN;
-  const rating_total: number = place_result.user_ratings_total ?? NaN;
+  const rating: number | undefined = place_result.rating ?? undefined;
+  const rating_total: number | undefined =
+    place_result.user_ratings_total ?? undefined;
   const photo_references: string[] | undefined =
     place_result.photos === undefined
       ? undefined
@@ -89,7 +93,7 @@ export async function GET(req: NextRequest) {
     open_now: open_now,
     hours: hours,
     rating: rating,
-    location: { lat, lon },
+    location: lat && lon ? { lat, lon } : undefined,
     rating_total: rating_total,
     photo_references: photo_references,
     reviews: reviews,
