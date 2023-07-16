@@ -85,6 +85,10 @@ const Page = async ({ params }: { params: { place_id: string } }) => {
         rating={data.rating}
         amount={data.rating_total}
       />
+      <div className="text-center mt-16">
+        <h1 className="text-4xl font-bold">Gallery</h1>
+        <HeaderUnderbar />
+      </div>
       <SlideShow photo_references={data.photo_references} />
       <BusinessInfo
         address={data.address}
