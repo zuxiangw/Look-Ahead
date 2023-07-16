@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import GoogleLogoImage from "@/app/images/logo/google.png";
+import Link from "next/link";
 interface Result {
   main_text: string;
   secondary_text: string;
@@ -28,14 +29,17 @@ interface SearchResultProps {
 
 const SearchResult: React.FC<SearchResultProps> = ({ result }) => {
   return (
-    <div className="h-12 px-4 hover:bg-gray-200 flex items-center bg-white">
+    <Link
+      href={`/home/place/${result.place_id}`}
+      className="h-12 px-4 hover:bg-gray-200 flex items-center bg-white"
+    >
       <h4>
         {" "}
         <strong>{result.main_text}</strong>
         {", "}
         {result.secondary_text}
       </h4>
-    </div>
+    </Link>
   );
 };
 

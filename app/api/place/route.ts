@@ -57,6 +57,16 @@ export async function GET(req: NextRequest) {
           return photo.photo_reference;
         });
 
+  let lat: number | undefined, lon: number | undefined;
+  try {
+    const location = place_result.geometry.location;
+    lat = location.lat;
+    lon = location.lng;
+  } catch (error) {
+    lat = undefined;
+    lon = undefined;
+  }
+
   const reviews: Review[] | undefined =
     place_result.reviews === undefined
       ? undefined
@@ -79,6 +89,7 @@ export async function GET(req: NextRequest) {
     open_now: open_now,
     hours: hours,
     rating: rating,
+    location: { lat, lon },
     rating_total: rating_total,
     photo_references: photo_references,
     reviews: reviews,
@@ -93,5 +104,3 @@ interface PhotoData {
   photo_reference: string;
   width: number;
 }
-
-interface ReviewData {}

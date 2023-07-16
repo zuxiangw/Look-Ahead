@@ -55,13 +55,12 @@ const SlideShow = ({ photo_references }: { photo_references: string[] }) => {
         <div
           className="absolute bg-[rgba(0,0,0,0.4)] h-[2000px] w-full top-20 z-50"
           id="modal-container"
+          onClick={closeModal}
         >
           <div className="text-6xl font-bold w-full flex flex-row-reverse">
-            <button className="my-8 mr-8 text-gray-300" onClick={closeModal}>
-              X
-            </button>
+            <button className="my-8 mr-8 text-gray-300">X</button>
           </div>
-          <div className="absolute w-full flex justify-center">
+          <div className="absolute w-full flex justify-center z-[51]">
             <div className="h-[1200px] w-[1200px] relative">
               <Image
                 src={`/api/place-photo?photo_reference=${photo_references[modalIdx]}`}

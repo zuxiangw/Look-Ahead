@@ -8,6 +8,7 @@ export default interface PlaceData {
   hours: string[];
   rating: number;
   rating_total: number;
+  location: { lat: number | undefined; lon: number | undefined };
   photo_references: string[] | undefined;
   reviews: Review[] | undefined;
 }

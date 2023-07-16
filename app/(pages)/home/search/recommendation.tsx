@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import RecommendData from "@/app/interfaces/RecommendData";
 import PlaceRating from "@/app/components/placeRating";
-
+import Link from "next/link";
 const Recommendation = () => {
   const [recommendPlaces, setRecommendPlaces] = useState<
     RecommendData[] | null
@@ -157,9 +157,12 @@ const RecommendationBlock = ({
       } mb-8 w-1/2 border-4 border-black rounded-xl p-8`}
     >
       <div className="flex flex-col justify-center items-center">
-        <h1 className="uppercase text-xl font-bold flex items-center justify-center">
+        <Link
+          href={`/home/place/${recommendation.place_id}`}
+          className="uppercase text-xl font-bold flex items-center justify-center"
+        >
           {recommendation.place_name}
-        </h1>
+        </Link>
         <PlaceRating
           rating={recommendation.place_rating}
           amount={recommendation.rating_amount}

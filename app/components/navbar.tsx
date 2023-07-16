@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const NavBar = () => {
   return (
-    <div className="flex flex-row h-20 bg-white align-center justify-center border-b-4 border-black sticky top-0 z-[51] mb-8">
+    <div className="flex flex-row h-20 bg-white align-center justify-center border-b-4 border-black sticky top-0 z-[51]">
       <Logo />
       <div className="flex my-auto">
         <p className="h-min text-3xl font-normal tracking-wider">Look Ahead</p>
@@ -32,7 +32,7 @@ const SearchNav = () => {
       className={`my-auto mr-14 tracking-widest text-2xl border-black hover:border-b-2 ${
         isOn ? "border-b-2" : ""
       }`}
-      href="/pages/home/search"
+      href="/home/search"
     >
       <h1> Search </h1>
     </Link>
