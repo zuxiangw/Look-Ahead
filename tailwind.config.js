@@ -20,6 +20,20 @@ module.exports = {
       width: {
         "search-bar": "32rem",
       },
+      keyframes: {
+        textBlue: {
+          "0%, 100%": { color: "blue" },
+          "50%": { color: "white" },
+        },
+        textRed: {
+          "0%, 100%": { color: "white" },
+          "50%": { color: "red" },
+        },
+      },
+      animation: {
+        textBlue: "textBlue 2s ease-in-out infinite",
+        textRed: "textRed 2s ease-in-out infinite",
+      },
     },
   },
   plugins: [],

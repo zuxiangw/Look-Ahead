@@ -1,10 +1,17 @@
 import NavBar from "../../components/navbar";
+import Link from "next/link";
 import Footer from "@/app/components/footer";
-export default function Layout({ children }: { children: React.ReactNode }) {
+export default function Layout(props: {
+  children: React.ReactNode;
+  authModal: React.ReactNode;
+}) {
   return (
     <div>
       <NavBar />
-      <div className="h-fit">{children}</div>
+      <div className="h-fit">
+        {props.children}
+        {props.authModal}
+      </div>
       <Footer />
     </div>
   );

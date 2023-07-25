@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import { connectToDB } from "../utils/database";
 import RecommendData from "@/app/interfaces/RecommendData";
 
 export async function POST(req: NextRequest) {

@@ -19,7 +19,7 @@ const NavBar = () => {
 import { LuPalmtree } from "react-icons/lu";
 const Logo = () => {
   return (
-    <div className="h-mins my-auto mx-14">
+    <div className="my-auto mx-14">
       <LuPalmtree className="text-5xl text-green-600" />
     </div>
   );
@@ -56,9 +56,9 @@ const SpacesNav = () => {
 import { IoPersonCircleOutline } from "react-icons/io5";
 const UserIcon = () => {
   return (
-    <div className="h-mins my-auto mr-10">
+    <Link href="/auth" className="h-mins my-auto mr-10">
       <IoPersonCircleOutline className="text-5xl hover:text-red-600 ml-auto"></IoPersonCircleOutline>
-    </div>
+    </Link>
   );
 };
 

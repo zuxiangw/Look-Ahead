@@ -13,8 +13,9 @@ const SearchPage = () => {
       <h1 className="mt-14 text-4xl font-bold tracking-wide">
         Recommended Places Near You
       </h1>
-      <HeaderUnderbar />
-      <Recommendation />
+      {/* <HeaderUnderbar />
+      <Recommendation /> */}
+      <div className="h-[96rem]"></div>
     </section>
   );
 };
