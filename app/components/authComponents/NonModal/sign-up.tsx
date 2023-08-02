@@ -1,31 +1,14 @@
-import Link from "next/link";
-import { FormEventHandler } from "react";
-import SignUpFormData from "@/app/interfaces/SignUpFormData";
-
+import { handleSignUpSubmit } from "../eventHandler";
+import BackBtn from "../backBtn";
 const SignUp = ({ toSignIn }: { toSignIn: () => void }) => {
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    const username = formData.get("username")?.toString();
-    const email = formData.get("email")?.toString();
-    const password = formData.get("password")?.toString();
-
-    if (username && email && password) sendData(username, email, password);
-  };
-
-  const sendData = async (
-    username: string,
-    email: string,
-    password: string
-  ) => {};
-
   return (
     <div className="h-screen w-full bg-white text-black">
+      <BackBtn />
       <div className="text-8xl font-bold flex flex-col items-center justify-center">
-        <h1 className="w-fit h-fit mt-8">Sign Up</h1>
+        <h1 className="w-fit h-fit mt-16">Sign Up</h1>
         <p className="mt-8 text-3xl">Sign Up To Start Researching</p>
       </div>
-      <form className="mt-16 mx-auto" onSubmit={handleSubmit}>
+      <form className="mt-16 mx-auto" onSubmit={handleSignUpSubmit}>
         <div className="mx-auto h-10 grid grid-cols-9">
           <h1
             className="h-10 text-black text-2xl col-start-2 col-end-4 flex justify-center items-center p-4 transition-transform ml-auto"

@@ -13,7 +13,7 @@ const SearchBar = () => {
         userValue.length != 0 &&
         (userValue.length <= 3 || userValue.length % 2 === 0)
       ) {
-        const res = await fetch(`/api/auto-complete?text=${userValue}`);
+        const res = await fetch(`/api/home/auto-complete?text=${userValue}`);
         const data = await res.json();
         setSearchInfo([]);
         setSearchInfo(data.data);
@@ -34,7 +34,7 @@ const SearchBar = () => {
   };
 
   const handleSearchReq = async () => {
-    const res = await fetch(`/api/auto-complete?text=${userInp}`);
+    const res = await fetch(`/api/home/auto-complete?text=${userInp}`);
     const data = await res.json();
     setSearchInfo(data.data);
   };

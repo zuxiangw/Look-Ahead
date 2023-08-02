@@ -21,7 +21,7 @@ const Footer = () => {
           <h1 className="text-3xl font-bold">Contacts</h1>
           <HeaderUnderbar />
         </div>
-        <p className="mt-8">lookahead@gmail.com</p>
+        <p className="mt-8">thelookaheadofficial@gmail.com</p>
         <p className="mt-8">1(234)-567-8912</p>
       </div>
     </div>

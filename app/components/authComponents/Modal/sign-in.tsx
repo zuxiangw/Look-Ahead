@@ -1,5 +1,5 @@
-import AuthModal from "@/app/components/AuthModal";
-import Link from "next/link";
+import BackBtn from "../backBtn";
+import { handleLoginSubmit } from "../eventHandler";
 const SignInModal = ({
   toSignUp,
   toForget,
@@ -9,11 +9,12 @@ const SignInModal = ({
 }) => {
   return (
     <>
-      <div className="text-6xl font-bold w-fit mx-auto mt-8">
+      <BackBtn />
+      <div className="text-6xl font-bold w-fit mx-auto mt-14">
         <h1>Sign In</h1>
       </div>
       <div>
-        <form className="mt-12 mx-auto" action="/api/sign-in" method="POST">
+        <form className="mt-12 mx-auto" onSubmit={handleLoginSubmit}>
           <div className="mx-auto h-10 grid grid-cols-9">
             <h1
               className="h-10 text-2xl col-start-1 col-end-4 flex justify-center items-center p-4 transition-transform ml-auto"
@@ -24,6 +25,7 @@ const SignInModal = ({
             <input
               className="w-full h-10 rounded-xl outline-0 p-4 text-xl col-start-4 col-end-7 border-4 border-black"
               type="text"
+              name="credential"
             />
           </div>
           <div className="mx-auto h-10 grid grid-cols-9 mt-8">
@@ -36,6 +38,7 @@ const SignInModal = ({
             <input
               className="w-full h-10 rounded-xl outline-0 p-4 text-xl col-start-4 col-end-7 border-4 border-black"
               type="password"
+              name="password"
             />
           </div>
           <div className="mx-auto text-xl">

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import UserIcon from "./navbarComponent/userIcon";
 
 const NavBar = () => {
   return (
@@ -29,9 +30,7 @@ const SearchNav = () => {
   let isOn: boolean = false;
   return (
     <Link
-      className={`my-auto mr-14 tracking-widest text-2xl border-black hover:border-b-2 ${
-        isOn ? "border-b-2" : ""
-      }`}
+      className="my-auto mr-14 tracking-widest text-2xl border-black hover:border-b-2"
       href="/home/search"
     >
       <h1> Search </h1>
@@ -43,21 +42,10 @@ const SpacesNav = () => {
   let isOn: boolean = false;
   return (
     <Link
-      className={`my-auto mr-14 tracking-widest text-2xl border-black hover:border-b-2 ${
-        isOn ? "border-b-2" : ""
-      }`}
+      className="my-auto mr-14 tracking-widest text-2xl border-black hover:border-b-2"
       href="/pages/welcome"
     >
       <h1> Spaces </h1>
-    </Link>
-  );
-};
-
-import { IoPersonCircleOutline } from "react-icons/io5";
-const UserIcon = () => {
-  return (
-    <Link href="/auth" className="h-mins my-auto mr-10">
-      <IoPersonCircleOutline className="text-5xl hover:text-red-600 ml-auto"></IoPersonCircleOutline>
     </Link>
   );
 };

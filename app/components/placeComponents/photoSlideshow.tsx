@@ -63,7 +63,7 @@ const SlideShow = ({ photo_references }: { photo_references: string[] }) => {
           <div className="absolute w-full flex justify-center z-[51]">
             <div className="h-[1200px] w-[1200px] relative">
               <Image
-                src={`/api/place-photo?photo_reference=${photo_references[modalIdx]}`}
+                src={`/api/place/place-photo?photo_reference=${photo_references[modalIdx]}`}
                 alt={photo_references[modalIdx]}
                 key={photo_references[modalIdx]}
                 fill={true}
@@ -88,7 +88,7 @@ const SlideShow = ({ photo_references }: { photo_references: string[] }) => {
               onClick={(event) => imageClickHandler(event, currIndex)}
             >
               <Image
-                src={`/api/place-photo?photo_reference=${photo_reference}`}
+                src={`/api/place/place-photo?photo_reference=${photo_reference}`}
                 alt={photo_reference}
                 fill={true}
                 className={`object-cover ${

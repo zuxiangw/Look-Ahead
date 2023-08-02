@@ -37,7 +37,7 @@ const Page = async ({ params }: { params: { place_id: string } }) => {
 };
 
 const fetchData = async (place_id: string) => {
-  const url = `http://localhost:3000/api/place?place_id=${place_id}`;
+  const url = `http://localhost:3000/api/place/place-details?place_id=${place_id}`;
   const res = await fetch(url, { next: { revalidate: 120 } });
   if (!res.ok) {
     throw new Error("Data fetching failed");
@@ -47,7 +47,7 @@ const fetchData = async (place_id: string) => {
 };
 
 const fetchWeather = async (lat: number, lon: number) => {
-  const url = `http://localhost:3000/api/weather?lat=${lat}&lon=${lon}`;
+  const url = `http://localhost:3000/api/place/weather?lat=${lat}&lon=${lon}`;
   const res = await fetch(url);
   if (!res.ok) {
     throw new Error("Data fetching failed");
@@ -244,7 +244,7 @@ const CurrentWeather = ({ current }: any) => {
         </h1>
         <div className="relative h-16 w-16">
           <Image
-            src={`/api/weather-icon-photo?url=${current.condition.icon}`}
+            src={`/api/place/weather-icon-photo?url=${current.condition.icon}`}
             alt={current.condition.text}
             fill={true}
           />

@@ -27,7 +27,7 @@ const Recommendation = () => {
       longitude: longitude,
     };
 
-    const res = await fetch("/api/recommendation", {
+    const res = await fetch("/api/home/recommendation", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -80,7 +80,7 @@ const Recommendation = () => {
       token: nextToken,
     };
 
-    const res = await fetch("/api/recommendation", {
+    const res = await fetch("/api/home/recommendation", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -171,7 +171,7 @@ const RecommendationBlock = ({
       {recommendation.photo_reference !== "" && (
         <div>
           <img
-            src={`/api/place-photo?photo_reference=${recommendation.photo_reference}`}
+            src={`/api/place/place-photo?photo_reference=${recommendation.photo_reference}`}
             alt={recommendation.place_name}
             className="rounded-xl"
           />
