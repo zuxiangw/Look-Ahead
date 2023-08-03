@@ -1,4 +1,5 @@
 import BackBtn from "../backBtn";
+import { handleForgetSubmit } from "../eventHandler";
 const ForgetModal = ({ toSignIn }: { toSignIn: () => void }) => {
   return (
     <>
@@ -6,7 +7,7 @@ const ForgetModal = ({ toSignIn }: { toSignIn: () => void }) => {
       <div className="text-6xl font-bold flex flex-col items-center justify-center">
         <h1 className="w-fit h-fit mt-16">Retrieve Password</h1>
       </div>
-      <form className="mt-16 mx-auto" action="/api/sign-in" method="POST">
+      <form className="mt-16 mx-auto" onSubmit={handleForgetSubmit}>
         <div className="mx-auto h-10 grid grid-cols-9">
           <h1
             className="h-10 text-black text-2xl col-start-2 col-end-4 flex justify-center items-center p-4 transition-transform ml-auto"
@@ -17,6 +18,7 @@ const ForgetModal = ({ toSignIn }: { toSignIn: () => void }) => {
           <input
             className="w-full h-10 rounded-xl outline-0 p-4 text-black text-2xl col-start-4 col-end-7 border-4 border-black"
             type="text"
+            name="email"
           />
         </div>
         <div className="flex justify-center mt-8">

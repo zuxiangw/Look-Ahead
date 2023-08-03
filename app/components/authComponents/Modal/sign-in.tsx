@@ -46,12 +46,14 @@ const SignInModal = ({
               <button
                 onClick={toSignUp}
                 className="w-fit col-start-4 col-end-5 mr-auto px-2 rounded-xl ease-in-out transition-colors hover:bg-black hover:text-white"
+                type="button"
               >
                 Sign Up
               </button>
               <button
                 onClick={toForget}
                 className="w-fit col-start-5 col-end-7 ml-auto underline"
+                type="button"
               >
                 Forgot your password?
               </button>

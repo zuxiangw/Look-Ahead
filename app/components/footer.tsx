@@ -1,7 +1,7 @@
 import HeaderUnderbar from "./headerUnderbar";
 const Footer = () => {
   return (
-    <div className="h-64 grid grid-col-3 mt-8 border-t-4 border-black">
+    <div className="h-64 grid grid-col-3 border-t-4 border-black">
       <div className="h-full col-start-1 p-8 flex justify-center tracking-wider">
         <div>
           <h1 className="text-3xl font-bold">Look Ahead</h1>

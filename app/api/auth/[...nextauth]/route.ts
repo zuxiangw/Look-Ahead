@@ -1,7 +1,7 @@
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { searchUser } from "@/app/utils/database";
+import { searchUserByNameNEmail } from "@/app/utils/database";
 import { RowDataPacket } from "mysql2";
 import bcrypt from "bcrypt";
 
@@ -24,7 +24,7 @@ const handler = NextAuth({
 
         const password = credentials.password;
 
-        const query_result = (await searchUser(
+        const query_result = (await searchUserByNameNEmail(
           credentials.cred,
           credentials.cred
         )) as RowDataPacket[];

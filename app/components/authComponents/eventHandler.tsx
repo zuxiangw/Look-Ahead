@@ -57,18 +57,18 @@ const signUp = async (username: string, email: string, password: string) => {
 export const handleForgetSubmit = (e: React.FormEvent<HTMLFormElement>) => {
   e.preventDefault();
   const formData = new FormData(e.currentTarget);
-  const email = formData.get("username")?.toString();
+  const email = formData.get("email")?.toString();
 
   if (email) forget(email);
   else toast.error("Please enter the email associated with your account");
 };
 
 const forget = async (email: string) => {
-  const fetchingUrl = new URL("/api/myauth/forget");
-  fetchingUrl.searchParams.set("email", email);
+  const url = `/api/myauth/forget?email=${email}`;
 
-  const res = await fetch(fetchingUrl);
+  const res = await fetch(url);
 
-  if (res.ok) toast.success("An reset link has been send to your email!");
+  if (res.ok)
+    toast.success("An reset link has been send to your email if it exists!");
   else toast.error(await res.text());
 };

@@ -11,6 +11,7 @@ export const connectDB = () => {
     user: "root",
     password: "Nishishabi123",
     database: "lookahead",
+    dateStrings: ["DATETIME"],
   });
   return pool;
 };
@@ -19,11 +20,11 @@ export async function insertToken(
   user_id: number,
   token_type: string,
   token_value: string,
-  created_at: string | undefined,
-  expires_at: string | undefined
+  created_at: Date | undefined,
+  expires_at: Date | undefined
 ) {
   if (!created_at) {
-    created_at = new Date().toISOString().slice(0, 19).replace("T", " ");
+    created_at = new Date();
   }
 
   const connection = connectDB();
@@ -51,9 +52,15 @@ export async function insertToken(
   const query_statement = `INSERT INTO Tokens ${query_columns} VALUES ${query_prepares}`;
 
   const ret = await connection.query(query_statement, query_prepare_vals);
+}
 
-  console.log("Insertion Complete");
-  console.log(ret);
+export async function validateResetToken(token_value: string) {
+  const connection = connectDB();
+
+  const query = `SELECT DISTINCT * FROM Tokens WHERE token_value = '${token_value}'`;
+  const [ret_query] = await connection.query(query);
+
+  return ret_query;
 }
 
 export async function getAdminTokens() {
@@ -81,7 +88,7 @@ export async function getAdminTokens() {
   return tokens;
 }
 
-export async function searchUser(
+export async function searchUserByNameNEmail(
   username: string | undefined,
   email: string | undefined
 ) {
@@ -102,6 +109,14 @@ export async function searchUser(
   return ret_query;
 }
 
+export async function searchUserById(id: number) {
+  const connection = connectDB();
+
+  const query = `SELECT * FROM Users WHERE id = ${id}`;
+  const [ret_query] = await connection.query<RowDataPacket[]>(query);
+  return ret_query[0];
+}
+
 export async function insertUser(
   username: string,
   email: string,
@@ -116,3 +131,26 @@ export async function insertUser(
   const query = `INSERT INTO Users (username, email, password_hash) VALUES ('${username}', '${email}', '${password_hash}')`;
   await connection.query<RowDataPacket[]>(query);
 }
+
+export async function updatePasswordWithToken(token: string, password: string) {
+  const connection = connectDB();
+
+  const token_query = `SELECT * FROM Tokens WHERE token_value = '${token}'`;
+  const [token_ret] = (await connection.query(token_query)) as RowDataPacket[];
+
+  const curr_tok = token_ret[0];
+
+  const hash_password = await bcrypt.hash(password, 10);
+
+  const update_query = `UPDATE Users SET password_hash = '${hash_password}' WHERE id = ${curr_tok.user_id}`;
+
+  await connection.query(update_query);
+}
+
+export const removeTokenById = async (id: number) => {
+  const connection = connectDB();
+
+  const query = `DELETE FROM Tokens WHERE id = ${id}`;
+
+  await connection.query(query);
+};
