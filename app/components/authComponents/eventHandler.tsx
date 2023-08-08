@@ -1,6 +1,7 @@
 import { toast } from "react-hot-toast";
 import { signIn } from "next-auth/react";
 import { navSignIn } from "@/app/utils/navSession";
+
 export const handleLoginSubmit = (e: React.FormEvent<HTMLFormElement>) => {
   e.preventDefault();
   const formData = new FormData(e.currentTarget);
@@ -31,6 +32,7 @@ const login = async (credential: string, password: string) => {
 };
 
 import SignUpFormData from "@/app/interfaces/SignUpFormData";
+import { redirect } from "next/navigation";
 export const handleSignUpSubmit = (e: React.FormEvent<HTMLFormElement>) => {
   e.preventDefault();
   const formData = new FormData(e.currentTarget);

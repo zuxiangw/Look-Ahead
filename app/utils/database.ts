@@ -159,3 +159,5 @@ export const removeTokenByValue = async (value: string) => {
 
   await connection.query(query);
 };
+
+export async function getAllReviews() {}

@@ -51,7 +51,7 @@ const SlideShow = ({ photo_references }: { photo_references: string[] }) => {
 
   return (
     <div className="h-search-hero w-full mt-8">
-      {modalIdx && (
+      {modalIdx !== null && (
         <div
           className="absolute bg-[rgba(0,0,0,0.4)] h-[2000px] w-full top-20 z-50"
           id="modal-container"

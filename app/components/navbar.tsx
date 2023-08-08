@@ -45,9 +45,9 @@ const SpacesNav = () => {
   return (
     <Link
       className="my-auto mr-14 tracking-widest text-2xl border-black hover:border-b-2"
-      href="/pages/welcome"
+      href="/home/reviews"
     >
-      <h1> Spaces </h1>
+      <h1> Reviews </h1>
     </Link>
   );
 };

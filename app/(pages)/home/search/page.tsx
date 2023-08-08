@@ -14,7 +14,7 @@ const SearchPage = () => {
         Recommended Places Near You
       </h1>
       <HeaderUnderbar />
-      {/* <Recommendation /> */}
+      <Recommendation />
       <div className="h-[96rem]"></div>
     </section>
   );
