@@ -5,6 +5,9 @@ export const handleLoginSubmit = (e: React.FormEvent<HTMLFormElement>) => {
   e.preventDefault();
   const formData = new FormData(e.currentTarget);
   const credential = formData.get("credential")?.toString();
+  if (!credential?.match("[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,}$")) {
+    return toast.error("The email that you submitted is in invalid format");
+  }
   const password = formData.get("password")?.toString();
 
   if (credential && password) login(credential, password);

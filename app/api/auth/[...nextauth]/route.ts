@@ -1,7 +1,7 @@
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { searchUserByNameNEmail } from "@/app/utils/database";
+import { insertUser, searchUserByEmail } from "@/app/utils/database";
 import { RowDataPacket } from "mysql2";
 import bcrypt from "bcrypt";
 
@@ -24,8 +24,7 @@ const handler = NextAuth({
 
         const password = credentials.password;
 
-        const query_result = (await searchUserByNameNEmail(
-          credentials.cred,
+        const query_result = (await searchUserByEmail(
           credentials.cred
         )) as RowDataPacket[];
 
@@ -35,6 +34,9 @@ const handler = NextAuth({
 
         const query_user = query_result[0];
 
+        if (!query_user.password_hash)
+          throw new Error("You should login with google");
+
         const result = await bcrypt.compare(password, query_user.password_hash);
 
         if (result) {
@@ -42,6 +44,7 @@ const handler = NextAuth({
             id: query_user.id,
             name: query_user.username,
             email: query_user.email,
+            image: query_user.imageUrl,
           };
         } else {
           throw new Error("Invalid Credentials");
@@ -51,6 +54,20 @@ const handler = NextAuth({
   ],
   pages: {
     signIn: "/auth",
+  },
+  callbacks: {
+    async signIn({ user }) {
+      if (!user.email) return false;
+
+      const userExistsRet = (await searchUserByEmail(
+        user.email
+      )) as RowDataPacket[];
+
+      if (userExistsRet.length === 0) {
+        insertUser(user.name ?? "", user.email, undefined, user.image ?? "");
+      }
+      return true;
+    },
   },
 });
 

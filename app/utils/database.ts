@@ -54,13 +54,19 @@ export async function insertToken(
   const ret = await connection.query(query_statement, query_prepare_vals);
 }
 
-export async function validateResetToken(token_value: string) {
+export async function validateToken(token_value: string) {
   const connection = connectDB();
 
   const query = `SELECT DISTINCT * FROM Tokens WHERE token_value = '${token_value}'`;
-  const [ret_query] = await connection.query(query);
+  const [ret_query] = (await connection.query(query)) as RowDataPacket[];
 
-  return ret_query;
+  if (ret_query.length === 0) throw new Error("Token Not Found");
+
+  const ret_token = ret_query[0];
+  const expires_at = new Date(ret_token.expires_at);
+  const now = new Date();
+  console.log(ret_token);
+  return now.getTime() - expires_at.getTime() <= 0;
 }
 
 export async function getAdminTokens() {
@@ -88,23 +94,10 @@ export async function getAdminTokens() {
   return tokens;
 }
 
-export async function searchUserByNameNEmail(
-  username: string | undefined,
-  email: string | undefined
-) {
-  if (!username && !email) {
-    return new Error("Username AND Email not provided");
-  }
-
+export async function searchUserByEmail(email: string) {
   const connection = connectDB();
 
-  let where;
-  if (username && email)
-    where = `username = '${username}' OR email = '${email}'`;
-  else if (!username) where = `email = '${email}'`;
-  else where = `username = '${username}'`;
-
-  const query = `SELECT DISTINCT * FROM Users WHERE ${where}`;
+  const query = `SELECT DISTINCT * FROM Users WHERE email = '${email}'`;
   const [ret_query] = await connection.query<RowDataPacket[]>(query);
   return ret_query;
 }
@@ -120,15 +113,27 @@ export async function searchUserById(id: number) {
 export async function insertUser(
   username: string,
   email: string,
-  password: string
+  password: string | undefined,
+  imageUrl: string | undefined
 ) {
-  if (!username || !email || !password)
-    throw new Error("All credentials required");
+  if (!email) throw new Error("An email is required");
 
   const connection = connectDB();
 
-  const password_hash = await bcrypt.hash(password, 10);
-  const query = `INSERT INTO Users (username, email, password_hash) VALUES ('${username}', '${email}', '${password_hash}')`;
+  let columns, column_values, password_hash;
+  if (!password && !imageUrl)
+    throw new Error("Both password and imageUrl not provided");
+  if (password && imageUrl)
+    throw new Error("Both password and imageUrl provided while signing up");
+  if (!password && imageUrl) {
+    columns = "(username, email, image_url)";
+    column_values = `('${username}', '${email}', '${imageUrl}')`;
+  } else if (password && !imageUrl) {
+    columns = "(username, email, password_hash)";
+    const password_hash = await bcrypt.hash(password, 10);
+    column_values = `('${username}', '${email}', '${password_hash}')`;
+  }
+  const query = `INSERT INTO Users ${columns} VALUES ${column_values}`;
   await connection.query<RowDataPacket[]>(query);
 }
 
@@ -147,10 +152,10 @@ export async function updatePasswordWithToken(token: string, password: string) {
   await connection.query(update_query);
 }
 
-export const removeTokenById = async (id: number) => {
+export const removeTokenByValue = async (value: string) => {
   const connection = connectDB();
 
-  const query = `DELETE FROM Tokens WHERE id = ${id}`;
+  const query = `DELETE FROM Tokens WHERE token_value = '${value}'`;
 
   await connection.query(query);
 };

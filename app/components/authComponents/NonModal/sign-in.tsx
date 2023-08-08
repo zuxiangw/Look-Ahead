@@ -1,5 +1,6 @@
 import BackBtn from "../backBtn";
 import { handleLoginSubmit } from "../eventHandler";
+import { signIn } from "next-auth/react";
 const SignIn = ({
   toSignUp,
   toForget,
@@ -20,7 +21,7 @@ const SignIn = ({
             className="h-10 text-white text-2xl col-start-2 col-end-4 flex justify-center items-center p-4 transition-transform ml-auto"
             id="username_text"
           >
-            Username or Email:{" "}
+            Email:{" "}
           </h1>
           <input
             className="w-full h-10 rounded-xl outline-0 p-4 text-black text-2xl col-start-4 col-end-7"
@@ -69,7 +70,10 @@ const SignIn = ({
       </form>
       <div className="mt-4">
         <div className="flex justify-center">
-          <button className="w-fit bg-white text-black p-4 rounded-xl mt-4 text-xl font-bold">
+          <button
+            className="w-fit bg-white text-black p-4 rounded-xl mt-4 text-xl font-bold"
+            onClick={() => signIn("google", { callbackUrl: "/" })}
+          >
             Login in with Google
           </button>
         </div>

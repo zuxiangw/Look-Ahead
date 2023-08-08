@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { setSignIn, setSignOut, navSignOut } from "@/app/utils/navSession";
 import { signOut } from "next-auth/react";
+
 const UserIcon = () => {
   const { data: session } = useSession();
 
@@ -28,7 +29,12 @@ const UserIcon = () => {
           signOut();
         }}
       >
-        <IoPersonCircleOutline className="text-5xl hover:text-red-600 ml-auto"></IoPersonCircleOutline>
+        {session?.user?.image && (
+          <img src={session?.user?.image} width={50} height={50} alt="" />
+        )}
+        {!session?.user?.image && (
+          <IoPersonCircleOutline className="text-5xl hover:text-red-600 ml-auto"></IoPersonCircleOutline>
+        )}
       </button>
     );
   else

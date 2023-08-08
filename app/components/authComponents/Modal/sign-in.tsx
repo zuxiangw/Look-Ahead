@@ -20,7 +20,7 @@ const SignInModal = ({
               className="h-10 text-2xl col-start-1 col-end-4 flex justify-center items-center p-4 transition-transform ml-auto"
               id="username_text"
             >
-              Username or Email:{" "}
+              Email:{" "}
             </h1>
             <input
               className="w-full h-10 rounded-xl outline-0 p-4 text-xl col-start-4 col-end-7 border-4 border-black"
