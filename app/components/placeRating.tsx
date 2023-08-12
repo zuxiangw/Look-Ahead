@@ -1,19 +1,22 @@
 "use client";
-// @ts-ignore
 import ReactStars from "react-stars";
 const PlaceRating = ({
   rating,
   amount,
+  size,
 }: {
   rating: number;
-  amount: number;
+  amount: number | null;
+  size: number;
 }) => {
   return (
     <div className="flex flex-col justify-center items-center">
-      <ReactStars count={5} value={rating} edit={false} size={36} />
-      <h3>
-        Out of <strong>{amount}</strong> total ratings
-      </h3>
+      <ReactStars count={5} value={rating} edit={false} size={size} />
+      {amount !== null && (
+        <h3>
+          Out of <strong>{amount}</strong> total ratings
+        </h3>
+      )}
     </div>
   );
 };

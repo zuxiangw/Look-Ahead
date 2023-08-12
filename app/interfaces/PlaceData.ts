@@ -17,6 +17,6 @@ export interface Review {
   author_name: string;
   profile_url: string;
   rating: number;
-  time_ago: string;
+  relative_time_description: string;
   text: string;
 }

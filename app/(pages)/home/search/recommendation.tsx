@@ -166,6 +166,7 @@ const RecommendationBlock = ({
         <PlaceRating
           rating={recommendation.place_rating}
           amount={recommendation.rating_amount}
+          size={36}
         />
       </div>
       {recommendation.photo_reference !== "" && (

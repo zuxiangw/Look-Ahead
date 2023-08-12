@@ -6,13 +6,15 @@ import bcrypt from "bcrypt";
 let pool: Pool | undefined = undefined;
 
 export const connectDB = () => {
-  pool = mysql.createPool({
-    host: "localhost",
-    user: "root",
-    password: "Nishishabi123",
-    database: "lookahead",
-    dateStrings: ["DATETIME"],
-  });
+  if (!pool)
+    pool = mysql.createPool({
+      host: "localhost",
+      user: "root",
+      password: "Nishishabi123",
+      database: "lookahead",
+      dateStrings: ["DATETIME"],
+      connectionLimit: 10,
+    });
   return pool;
 };
 
@@ -160,4 +162,51 @@ export const removeTokenByValue = async (value: string) => {
   await connection.query(query);
 };
 
-export async function getAllReviews() {}
+export async function getAllReviews() {
+  const connection = connectDB();
+
+  const query = "SELECT * FROM Reviews";
+
+  const [ret_query] = (await connection.query(query)) as RowDataPacket[];
+
+  if (ret_query.length === 0) return [];
+  else return ret_query;
+}
+
+export async function getReviewsByPlaceId(place_id: string) {
+  const connection = connectDB();
+
+  const query = `SELECT * FROM Reviews WHERE place_id = '${place_id}'`;
+
+  const [ret_query] = await connection.query<RowDataPacket[]>(query);
+
+  return ret_query;
+}
+
+export async function addReview(
+  user_id: string,
+  place_id: string,
+  place_name: string,
+  review_title: string,
+  review_text: string,
+  review_rating: number
+) {
+  const connection = connectDB();
+
+  const query =
+    "INSERT INTO Reviews (user_id, place_id, place_name, review_title, review_text, review_rating, posted_on) VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+  try {
+    await connection.query<RowDataPacket[]>(query, [
+      user_id,
+      place_id,
+      place_name,
+      review_title,
+      review_text,
+      review_rating,
+      new Date(),
+    ]);
+  } catch (error) {
+    throw new Error((error as Error).toString());
+  }
+}

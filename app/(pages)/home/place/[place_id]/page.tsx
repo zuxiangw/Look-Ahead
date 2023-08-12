@@ -1,4 +1,5 @@
 import SlideShow from "@/app/components/placeComponents/photoSlideshow";
+import PlaceReviewsContainer from "@/app/components/placeComponents/PlaceReviewsContainer";
 const Page = async ({ params }: { params: { place_id: string } }) => {
   const place_data = await fetchData(params.place_id);
   const weather_data = place_data.location
@@ -6,7 +7,7 @@ const Page = async ({ params }: { params: { place_id: string } }) => {
     : undefined;
   return (
     <section className="mt-8" id="main-page">
-      <NameAndRating
+      {/* <NameAndRating
         name={place_data.place_name}
         rating={place_data.rating}
         amount={place_data.rating_total}
@@ -31,7 +32,11 @@ const Page = async ({ params }: { params: { place_id: string } }) => {
         />
       ) : (
         <div>No Weather Available</div>
-      )}
+      )} */}
+      <PlaceReviewsContainer
+        google_reviews={place_data.reviews}
+        place_id={params.place_id}
+      />
     </section>
   );
 };
@@ -69,7 +74,9 @@ const NameAndRating = ({
   return (
     <section className="flex flex-col justify-center items-center text-center">
       <h1 className="text-6xl font-bold">{name ? name : "*Name not found*"}</h1>
-      {rating && amount && <PlaceRating rating={rating} amount={amount} />}
+      {rating && amount && (
+        <PlaceRating rating={rating} amount={amount} size={36} />
+      )}
     </section>
   );
 };
