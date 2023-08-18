@@ -2,10 +2,13 @@
 import { useState } from "react";
 import ReactStars from "react-stars";
 import { toast } from "react-hot-toast";
+import { useRouter } from "next/navigation";
 const WriteNewReview = ({ place_id }: { place_id: string }) => {
   const [rating, setRating] = useState<number>(0);
   const [title, setTitle] = useState<string>("");
   const [text, setText] = useState<string>("");
+
+  const router = useRouter();
 
   const updateInputTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
@@ -53,6 +56,7 @@ const WriteNewReview = ({ place_id }: { place_id: string }) => {
 
     if (res.status === 200) {
       toast.success("Review has been added!");
+      router.refresh();
     } else {
       toast.error(await res.text());
     }

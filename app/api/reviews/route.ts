@@ -6,11 +6,12 @@ import {
   searchUserById,
 } from "@/app/utils/database";
 import { NextRequest, NextResponse } from "next/server";
+import { Review, User } from "@/app/interfaces/Database";
 
 export async function GET(req: NextRequest) {
   const place_id = req.nextUrl.searchParams.get("place_id");
 
-  let reviews;
+  let reviews: Review[];
   if (!place_id) {
     try {
       reviews = await getAllReviews();
@@ -34,8 +35,8 @@ export async function GET(req: NextRequest) {
     }
   }
 
-  const promises = reviews.map(async (review: any) => {
-    const user = await searchUserById(review.user_id);
+  const promises = reviews.map(async (review: Review) => {
+    const user = (await searchUserById(review.user_id))[0];
     return {
       ...review,
       username: user.username,

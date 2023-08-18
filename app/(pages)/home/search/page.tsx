@@ -15,7 +15,6 @@ const SearchPage = () => {
       </h1>
       <HeaderUnderbar />
       <Recommendation />
-      <div className="h-[96rem]"></div>
     </section>
   );
 };

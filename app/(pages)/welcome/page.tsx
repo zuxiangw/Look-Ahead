@@ -4,7 +4,7 @@ import { signOut, useSession } from "next-auth/react";
 import { navSignOut } from "@/app/utils/navSession";
 export default function Welcome() {
   const { data: session } = useSession();
-  // console.log(session);
+
   return (
     <div className="h-screen w-full bg-black">
       <div className="flex py-4">

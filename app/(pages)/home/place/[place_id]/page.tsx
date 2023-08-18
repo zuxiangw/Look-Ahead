@@ -7,7 +7,7 @@ const Page = async ({ params }: { params: { place_id: string } }) => {
     : undefined;
   return (
     <section className="mt-8" id="main-page">
-      {/* <NameAndRating
+      <NameAndRating
         name={place_data.place_name}
         rating={place_data.rating}
         amount={place_data.rating_total}
@@ -32,7 +32,7 @@ const Page = async ({ params }: { params: { place_id: string } }) => {
         />
       ) : (
         <div>No Weather Available</div>
-      )} */}
+      )}
       <PlaceReviewsContainer
         google_reviews={place_data.reviews}
         place_id={params.place_id}
