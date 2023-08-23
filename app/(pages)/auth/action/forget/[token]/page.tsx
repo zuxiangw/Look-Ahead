@@ -1,4 +1,4 @@
-import ForgetPassword from "@/app/components/forgetPassword";
+import ForgetPassword from "@/app/(pages)/auth/action/forget/[token]/forgetPassword";
 export default async function Page({ params }: { params: { token: string } }) {
   const valid_token = await validateToken(params.token);
   if (valid_token) {

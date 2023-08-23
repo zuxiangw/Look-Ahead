@@ -5,13 +5,12 @@ import { navSignIn } from "@/app/utils/navSession";
 export const handleLoginSubmit = (e: React.FormEvent<HTMLFormElement>) => {
   e.preventDefault();
   const formData = new FormData(e.currentTarget);
-  const credential = formData.get("credential")?.toString();
-  if (!credential?.match("[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,}$")) {
+  const email = formData.get("credential")?.toString();
+  const password = formData.get("password")?.toString();
+  if (!email?.match("[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,}$")) {
     return toast.error("The email that you submitted is in invalid format");
   }
-  const password = formData.get("password")?.toString();
-
-  if (credential && password) login(credential, password);
+  if (email && password) login(email, password);
   else toast.error("One or more field is empty");
 };
 
@@ -21,7 +20,6 @@ const login = async (credential: string, password: string) => {
     password: password,
     redirect: false,
   });
-
   if (res) {
     if (res.error) toast.error(res.error);
     else {
@@ -32,19 +30,30 @@ const login = async (credential: string, password: string) => {
 };
 
 import SignUpFormData from "@/app/interfaces/SignUpFormData";
-import { redirect } from "next/navigation";
-export const handleSignUpSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+export const handleSignUpSubmit = (
+  e: React.FormEvent<HTMLFormElement>,
+  toSignIn: () => void
+) => {
   e.preventDefault();
   const formData = new FormData(e.currentTarget);
   const username = formData.get("username")?.toString();
   const email = formData.get("email")?.toString();
+  if (!email?.match("[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,}$")) {
+    return toast.error("The email that you submitted is in invalid format");
+  }
   const password = formData.get("password")?.toString();
 
-  if (username && email && password) signUp(username, email, password);
+  if (username && email && password)
+    signUp(username, email, password, toSignIn);
   else toast.error("One or more field is empty");
 };
 
-const signUp = async (username: string, email: string, password: string) => {
+const signUp = async (
+  username: string,
+  email: string,
+  password: string,
+  toSignIn: () => void
+) => {
   const data: SignUpFormData = {
     username,
     email,
@@ -55,8 +64,10 @@ const signUp = async (username: string, email: string, password: string) => {
     body: JSON.stringify(data),
   });
 
-  if (res.ok) toast.success("Success!");
-  else toast.error(await res.text());
+  if (res.ok) {
+    toast.success("Success!");
+    toSignIn();
+  } else toast.error(await res.text());
 };
 
 export const handleForgetSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -69,9 +80,13 @@ export const handleForgetSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 };
 
 const forget = async (email: string) => {
-  const url = `/api/myauth/forget?email=${email}`;
+  const data = JSON.stringify({ email: email });
+  const url = `/api/myauth/forget`;
 
-  const res = await fetch(url);
+  const res = await fetch(url, {
+    method: "POST",
+    body: data,
+  });
 
   if (res.ok)
     toast.success("An reset link has been send to your email if it exists!");

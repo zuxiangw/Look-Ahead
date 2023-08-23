@@ -8,7 +8,10 @@ const SignUp = ({ toSignIn }: { toSignIn: () => void }) => {
         <h1 className="w-fit h-fit mt-16">Sign Up</h1>
         <p className="mt-8 text-3xl">Sign Up To Start Researching</p>
       </div>
-      <form className="mt-16 mx-auto" onSubmit={handleSignUpSubmit}>
+      <form
+        className="mt-16 mx-auto"
+        onSubmit={(e) => handleSignUpSubmit(e, toSignIn)}
+      >
         <div className="mx-auto h-10 grid grid-cols-9">
           <h1
             className="h-10 text-black text-2xl col-start-2 col-end-4 flex justify-center items-center p-4 transition-transform ml-auto"

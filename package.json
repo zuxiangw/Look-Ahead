@@ -20,7 +20,7 @@
     "eslint-config-next": "13.4.7",
     "googleapis": "^123.0.0",
     "mysql2": "^3.5.2",
-    "next": "^13.4.16",
+    "next": "^13.4.19",
     "next-auth": "^4.22.3",
     "nodemailer": "^6.9.4",
     "postcss": "8.4.24",

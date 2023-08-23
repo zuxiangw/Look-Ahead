@@ -7,7 +7,12 @@ const SignUpModal = ({ toSignIn }: { toSignIn: () => void }) => {
       <div className="text-6xl font-bold w-fit mx-auto mt-14">
         <h1>Sign Up</h1>
       </div>
-      <form className="mt-12 mx-auto" onSubmit={handleSignUpSubmit}>
+      <form
+        className="mt-12 mx-auto"
+        onSubmit={(e: React.FormEvent<HTMLFormElement>) =>
+          handleSignUpSubmit(e, toSignIn)
+        }
+      >
         <div className="mx-auto h-10 grid grid-cols-9">
           <h1
             className="h-10 text-black text-2xl col-start-2 col-end-4 flex justify-center items-center p-4 transition-transform ml-auto"

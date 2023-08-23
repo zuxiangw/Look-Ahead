@@ -14,8 +14,8 @@ const handler = NextAuth({
     CredentialsProvider({
       name: "credentials",
       credentials: {
-        cred: { label: "cred", type: "text", placeholder: "jsmith" },
-        password: { label: "Password", type: "password" },
+        cred: { label: "cred", type: "text" },
+        password: { label: "password", type: "password" },
       },
       async authorize(credentials) {
         if (!credentials?.cred || !credentials.password) {
@@ -24,9 +24,7 @@ const handler = NextAuth({
 
         const password = credentials.password;
 
-        const query_result = (await searchUserByEmail(
-          credentials.cred
-        )) as RowDataPacket[];
+        const query_result = await searchUserByEmail(credentials.cred);
 
         if (query_result.length === 0) {
           throw new Error("Invalid Credentials");
@@ -41,7 +39,7 @@ const handler = NextAuth({
 
         if (result) {
           return {
-            id: query_user.id,
+            id: query_user.id.toString(),
             name: query_user.username,
             email: query_user.email,
             image: query_user.imageUrl,
@@ -58,10 +56,8 @@ const handler = NextAuth({
   callbacks: {
     async signIn({ user }) {
       if (!user.email) return false;
-
-      const userExistsRet = (await searchUserByEmail(
-        user.email
-      )) as RowDataPacket[];
+      console.log(user.email);
+      const userExistsRet = await searchUserByEmail(user.email);
 
       if (userExistsRet.length === 0) {
         insertUser(user.name ?? "", user.email, undefined, user.image ?? "");

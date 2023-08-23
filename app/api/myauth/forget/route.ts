@@ -4,12 +4,18 @@ import { sendAdminMail } from "@/app/utils/mail";
 import { RowDataPacket } from "mysql2";
 import crypto from "crypto";
 
-export async function GET(req: NextRequest) {
-  const email = req.nextUrl.searchParams.get("email");
+export async function POST(req: NextRequest) {
+  const data = await req.json();
+  const email = data.email;
   if (!email) return new NextResponse("No email provided!", { status: 400 });
 
+  const user = await searchUserByEmail(email);
+  if (user.length !== 0) {
+    if (!user[0].password_hash)
+      return new NextResponse("You should login with Google!", { status: 400 });
+  }
   try {
-    performForget(email);
+    await performForget(email);
   } catch (error) {
     return new NextResponse("Error Occured", { status: 500 });
   }
@@ -30,7 +36,7 @@ async function performForget(email: string) {
       const body = `You have requested to reset your password for Look Ahead. Please head to the following link to reset your password: http://localhost:3000/auth/action/forget/${reset_token}\n`;
       await sendAdminMail(user.email, "Reset Password Link", body);
     } catch (error) {
-      throw new Error("Error occurred");
+      throw error;
     }
   }
 }
