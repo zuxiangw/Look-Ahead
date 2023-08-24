@@ -34,6 +34,9 @@ const handler = NextAuth({
         if (!query_user.password_hash)
           throw new Error("You should login with google");
 
+        if (!query_user.validated)
+          throw new Error("Your account has not been validated!");
+
         const result = await bcrypt.compare(password, query_user.password_hash);
 
         if (result) {

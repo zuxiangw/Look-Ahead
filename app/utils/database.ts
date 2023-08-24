@@ -1,6 +1,6 @@
-import mysql from "mysql2/promise";
+import mysql, { ResultSetHeader } from "mysql2/promise";
 import { Pool } from "mysql2/promise";
-import { RowDataPacket } from "mysql2/promise";
+import crypto from "crypto";
 import { User, Review, Token } from "../interfaces/Database";
 import bcrypt from "bcrypt";
 
@@ -74,10 +74,47 @@ export async function validateToken(token_value: string) {
     const expires_at = new Date(ret_token.expires_at);
     const now = new Date();
 
-    return now.getTime() - expires_at.getTime() <= 0;
+    const isValid = now.getTime() - expires_at.getTime() <= 0;
+
+    if (!isValid) return false;
+
+    if (ret_token.token_type === "register_token") {
+      const user_id = ret_token.user_id;
+      const validate_query = `UPDATE Users SET validated = true WHERE id = ${user_id}`;
+      connection.query(validate_query);
+      removeTokenByValue(ret_token.token_value);
+    }
+
+    return true;
   } catch (error) {
     throw error;
   }
+}
+
+export async function removeTokenByUserId(user_id: number) {
+  const connection = connectDB();
+
+  const query = `DELETE FROM Tokens WHERE user_id = ${user_id}`;
+  connection.query(query);
+}
+
+export async function updateRegisterToken(
+  user_id: number,
+  token_value: string,
+  created_at: Date,
+  expires_at: Date
+) {
+  const connection = connectDB();
+
+  const query = `UPDATE Tokens SET token_value = '${token_value}', created_at = '${created_at
+    .toISOString()
+    .slice(0, 19)
+    .replace("T", " ")}', expires_at = '${expires_at
+    .toISOString()
+    .slice(0, 19)
+    .replace("T", " ")}' WHERE user_id = ${user_id}`;
+  const ret_query = await connection.query(query);
+  console.log(ret_query);
 }
 
 export async function getAdminTokens() {
@@ -144,15 +181,27 @@ export async function insertUser(
     if (password && imageUrl)
       throw new Error("Both password and imageUrl provided while signing up");
     if (!password && imageUrl) {
-      columns = "(username, email, image_url)";
-      column_values = `('${username}', '${email}', '${imageUrl}')`;
+      columns = "(username, email, image_url, validated)";
+      column_values = `('${username}', '${email}', '${imageUrl}', false)`;
     } else if (password && !imageUrl) {
-      columns = "(username, email, password_hash)";
+      columns = "(username, email, password_hash, validated)";
       const password_hash = await bcrypt.hash(password, 10);
-      column_values = `('${username}', '${email}', '${password_hash}')`;
+      column_values = `('${username}', '${email}', '${password_hash}', false)`;
     }
     const query = `INSERT INTO Users ${columns} VALUES ${column_values}`;
-    await connection.query(query);
+    const [result] = await connection.query<ResultSetHeader>(query);
+    return result.insertId;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function removeUserById(id: number) {
+  const connection = connectDB();
+
+  const query = `DELETE FROM Users WHERE id = ${id}`;
+  try {
+    connection.query(query);
   } catch (error) {
     throw error;
   }
@@ -238,4 +287,9 @@ export async function addReview(
   } catch (error) {
     throw new Error((error as Error).toString());
   }
+}
+
+export function createToken() {
+  const tokenBuffer = crypto.randomBytes(32);
+  return tokenBuffer.toString("hex");
 }

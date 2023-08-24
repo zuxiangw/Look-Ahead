@@ -5,6 +5,8 @@ export interface User extends RowDataPacket {
   username: string;
   email: string;
   password_hash: string;
+  image_url: string;
+  validated: boolean;
 }
 
 export interface Token extends RowDataPacket {

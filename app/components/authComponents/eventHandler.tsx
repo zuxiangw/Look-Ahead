@@ -65,7 +65,7 @@ const signUp = async (
   });
 
   if (res.ok) {
-    toast.success("Success!");
+    toast.success("An verification email has been sent to your email!");
     toSignIn();
   } else toast.error(await res.text());
 };
