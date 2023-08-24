@@ -14,9 +14,9 @@ export const handleLoginSubmit = (e: React.FormEvent<HTMLFormElement>) => {
   else toast.error("One or more field is empty");
 };
 
-const login = async (credential: string, password: string) => {
+const login = async (email: string, password: string) => {
   const res = await signIn("credentials", {
-    cred: credential,
+    email: email,
     password: password,
     redirect: false,
   });

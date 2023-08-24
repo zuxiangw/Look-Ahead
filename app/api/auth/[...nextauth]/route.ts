@@ -2,7 +2,6 @@ import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { insertUser, searchUserByEmail } from "@/app/utils/database";
-import { RowDataPacket } from "mysql2";
 import bcrypt from "bcrypt";
 
 const handler = NextAuth({
@@ -14,17 +13,17 @@ const handler = NextAuth({
     CredentialsProvider({
       name: "credentials",
       credentials: {
-        cred: { label: "cred", type: "text" },
+        email: { label: "email", type: "text" },
         password: { label: "password", type: "password" },
       },
       async authorize(credentials) {
-        if (!credentials?.cred || !credentials.password) {
+        if (!credentials?.email || !credentials.password) {
           throw new Error("Please enter an username/email and password");
         }
 
         const password = credentials.password;
 
-        const query_result = await searchUserByEmail(credentials.cred);
+        const query_result = await searchUserByEmail(credentials.email);
 
         if (query_result.length === 0) {
           throw new Error("Invalid Credentials");
@@ -50,17 +49,22 @@ const handler = NextAuth({
       },
     }),
   ],
-  pages: {
-    signIn: "/auth",
-  },
+  // pages: {
+  //   signIn: "/auth",
+  // },
   callbacks: {
     async signIn({ user }) {
       if (!user.email) return false;
-      console.log(user.email);
+
       const userExistsRet = await searchUserByEmail(user.email);
 
       if (userExistsRet.length === 0) {
-        insertUser(user.name ?? "", user.email, undefined, user.image ?? "");
+        insertUser(
+          user.name ?? "(DEFAULT_NAME)",
+          user.email,
+          undefined,
+          user.image ?? ""
+        );
       }
       return true;
     },
