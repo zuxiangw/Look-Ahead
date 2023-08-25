@@ -6,12 +6,12 @@ const Forget = ({ toSignIn }: { toSignIn: () => void }) => {
     <div className="h-screen w-full bg-black text-white">
       <BackBtn />
       <div className="text-8xl font-bold flex flex-col items-center justify-center">
-        <h1 className="w-fit h-fit mt-16">Retrieve Password</h1>
+        <h1 className="w-fit h-fit mt-16 text-center">Retrieve Password</h1>
       </div>
       <form className="mt-16 mx-auto" onSubmit={handleForgetSubmit}>
         <div className="mx-auto h-10 grid grid-cols-9">
           <h1
-            className="h-10 text-white text-2xl col-start-2 col-end-4 flex justify-center items-center p-4 transition-transform ml-auto"
+            className="h-10 text-white text-2xl col-start-1 col-end-4 flex justify-center items-center p-4 transition-transform ml-auto"
             id="username_text"
           >
             Registered Email:{" "}

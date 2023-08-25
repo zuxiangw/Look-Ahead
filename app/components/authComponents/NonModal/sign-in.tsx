@@ -18,7 +18,7 @@ const SignIn = ({
       <form className="mt-16 mx-auto" onSubmit={handleLoginSubmit}>
         <div className="mx-auto h-10 grid grid-cols-9">
           <h1
-            className="h-10 text-white text-2xl col-start-2 col-end-4 flex justify-center items-center p-4 transition-transform ml-auto"
+            className="h-10 text-white text-2xl col-start-1 col-end-4 flex justify-center items-center p-4 transition-transform ml-auto"
             id="username_text"
           >
             Email:{" "}
@@ -31,7 +31,7 @@ const SignIn = ({
         </div>
         <div className="mx-auto h-10 grid grid-cols-9 mt-8">
           <h1
-            className="h-10 text-white text-2xl col-start-2 col-end-4 flex justify-center items-center p-4 transition-transform ml-auto"
+            className="h-10 text-white text-2xl col-start-1 col-end-4 flex justify-center items-center p-4 transition-transform ml-auto"
             id="username_text"
           >
             Password:{" "}

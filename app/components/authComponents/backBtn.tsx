@@ -6,7 +6,7 @@ const BackBtn = () => {
 
   return (
     <button
-      className="absolute text-5xl top-16 left-16"
+      className="absolute text-5xl top-8 left-8"
       onClick={() => router.back()}
     >
       X

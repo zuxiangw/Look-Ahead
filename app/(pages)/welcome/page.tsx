@@ -18,18 +18,8 @@ export default function Welcome() {
       </div>
       <div className="text-white text-center mt-8">
         <div className="text-9xl font-bold">
-          <h1
-            className={
-              false ? "animate-[textBlue_3s_ease-in-out_infinite]" : ""
-            }
-          >
-            Look
-          </h1>
-          <h1
-            className={false ? "animate-[textRed_3s_ease-in-out_infinite]" : ""}
-          >
-            Ahead
-          </h1>
+          <h1 className="animate-[textBlue_3s_ease-in-out_infinite]">Look</h1>
+          <h1 className="animate-[textRed_3s_ease-in-out_infinite]">Ahead</h1>
         </div>
         <p className="mt-8 text-3xl">
           Look up a desired place, review and not meet the unexpected
