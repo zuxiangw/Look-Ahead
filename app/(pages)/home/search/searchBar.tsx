@@ -15,7 +15,6 @@ const SearchBar = () => {
       ) {
         const res = await fetch(`/api/home/auto-complete?text=${userValue}`);
         const data = await res.json();
-        setSearchInfo([]);
         setSearchInfo(data.data);
       }
     } catch (error) {
@@ -46,7 +45,7 @@ const SearchBar = () => {
 
   return (
     <div className="flex flex-col items-center h-min mt-14">
-      <form className="w-search-bar" onSubmit={handleSearchBtn}>
+      <form className="sm:w-search-bar w-9/12" onSubmit={handleSearchBtn}>
         <div className="relative">
           <input
             type="text"
@@ -61,7 +60,12 @@ const SearchBar = () => {
           </button>
         </div>
       </form>
-      {searchInfo.length !== 0 && userInp.length !== 0 && (
+      {!searchInfo && (
+        <div className="bg-white sm:w-search-bar w-9/12 rounded-xl h-12 px-4 flex items-center justify-center">
+          No Results Found
+        </div>
+      )}
+      {searchInfo && searchInfo.length !== 0 && userInp.length !== 0 && (
         <SearchResults results={searchInfo} />
       )}
     </div>

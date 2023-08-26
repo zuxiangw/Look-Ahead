@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import RecommendData from "@/app/interfaces/RecommendData";
 import PlaceRating from "@/app/components/placeRating";
 import Link from "next/link";
+import Image from "next/image";
 const Recommendation = () => {
   const [recommendPlaces, setRecommendPlaces] = useState<
     RecommendData[] | null
@@ -151,34 +152,59 @@ const RecommendationBlock = ({
   recommendation: RecommendData;
 }) => {
   return (
-    <div
-      className={`${
-        recommendation.photo_reference === "" ? "" : "grid grid-cols-2"
-      } mb-8 w-1/2 border-4 border-black rounded-xl p-8`}
-    >
-      <div className="flex flex-col justify-center items-center">
+    <>
+      {/* Desktop Display */}
+      <div
+        className={`${
+          recommendation.photo_reference === ""
+            ? "lg:block hidden"
+            : "lg:grid hidden grid-cols-2"
+        } mb-8 w-1/2 border-4 border-black rounded-xl p-8`}
+      >
+        <div className="flex flex-col justify-center items-center">
+          <Link
+            href={`/home/place/${recommendation.place_id}`}
+            className="uppercase text-xl font-bold flex items-center justify-center"
+          >
+            {recommendation.place_name}
+          </Link>
+          <PlaceRating
+            rating={recommendation.place_rating}
+            amount={recommendation.rating_amount}
+            size={36}
+          />
+        </div>
+        {recommendation.photo_reference !== "" && (
+          <img
+            src={`/api/place/place-photo?photo_reference=${recommendation.photo_reference}`}
+            alt={recommendation.place_name}
+            className="rounded-xl"
+          />
+        )}
+      </div>
+
+      {/* Mobile Display */}
+      <div className="lg:hidden flex flex-col mb-8 w-3/4 border-4 border-black rounded-xl p-8">
         <Link
           href={`/home/place/${recommendation.place_id}`}
           className="uppercase text-xl font-bold flex items-center justify-center"
         >
           {recommendation.place_name}
         </Link>
+        {recommendation.photo_reference !== "" && (
+          <img
+            src={`/api/place/place-photo?photo_reference=${recommendation.photo_reference}`}
+            alt={recommendation.place_name}
+            className="rounded-xl"
+          />
+        )}
         <PlaceRating
           rating={recommendation.place_rating}
           amount={recommendation.rating_amount}
           size={36}
         />
       </div>
-      {recommendation.photo_reference !== "" && (
-        <div>
-          <img
-            src={`/api/place/place-photo?photo_reference=${recommendation.photo_reference}`}
-            alt={recommendation.place_name}
-            className="rounded-xl"
-          />
-        </div>
-      )}
-    </div>
+    </>
   );
 };
 
