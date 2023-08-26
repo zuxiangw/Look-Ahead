@@ -1,5 +1,5 @@
 "use client";
-import ReviewsContainer from "@/app/components/ReviewsContainer";
+import ReviewsContainer from "@/app/(pages)/home/reviews/ReviewsContainer";
 import Review from "@/app/interfaces/Review";
 import { useState, useEffect } from "react";
 
