@@ -1,5 +1,5 @@
-import PlaceRating from "../../../components/placeRating";
-import Review from "../../../interfaces/Review";
+import PlaceRating from "../placeRating";
+import Review from "../../interfaces/Review";
 import Link from "next/link";
 
 const ReviewsContainer = ({ reviews }: { reviews: Review[] }) => {
@@ -73,10 +73,10 @@ const OneReview = ({
         >
           {place_name}
         </Link>
-        <h1 className="text-2xl font-bold col-start-1 col-end-8 m-auto ">
+        <h1 className="text-2xl font-bold col-start-1 col-end-8 m-auto">
           {review_title}
         </h1>
-        <p className="text-2xl mt-4">{review_text}</p>
+        <p className="text-2xl mt-4 break-words">{review_text}</p>
         <section className="flex flex-row justify-evenly">
           <PlaceRating rating={review_rating} amount={null} size={36} />
           <div>

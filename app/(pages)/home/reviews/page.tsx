@@ -1,5 +1,5 @@
 import HeaderUnderbar from "@/app/components/headerUnderbar";
-import ReviewsManager from "./ReviewsManager";
+import ReviewsManager from "../../../components/placeComponents/ReviewsManager";
 import { toast } from "react-hot-toast";
 
 const Page = async () => {

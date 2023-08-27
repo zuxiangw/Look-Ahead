@@ -56,6 +56,17 @@ const WriteNewReview = ({ place_id }: { place_id: string }) => {
 
     if (res.status === 200) {
       toast.success("Review has been added!");
+      const inp_title = document.getElementById("inp_title");
+      if (inp_title) {
+        (inp_title as HTMLInputElement).value = "";
+      }
+      const inp_text = document.getElementById("inp_text");
+      if (inp_text) {
+        (inp_text as HTMLInputElement).value = "";
+      }
+      setRating(0);
+      setText("");
+      setTitle("");
       router.refresh();
     } else {
       toast.error(await res.text());
@@ -77,6 +88,7 @@ const WriteNewReview = ({ place_id }: { place_id: string }) => {
                 type="text"
                 onChange={updateInputTitle}
                 className="border-black border-2 w-3/4 h-10 px-2"
+                id="inp_title"
               />
             </div>
             <p>Current Character Count: {title.length}</p>
@@ -99,7 +111,8 @@ const WriteNewReview = ({ place_id }: { place_id: string }) => {
           <textarea
             name="text"
             onChange={updateInputText}
-            className="w-full border-2 border-black h-20"
+            className="w-full border-2 border-black h-20 resize-none"
+            id="inp_text"
           />
           <div className="flex flex-row">
             <p className="mr-auto">Current Character Count: {text.length}</p>

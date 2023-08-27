@@ -56,7 +56,7 @@ const ExchangingMeasurements = ({
       </div>
       <button
         onClick={revertState}
-        className="border-2 border-black rounded-full bg-white hover:bg-yellow-300 transition-colors col-start-10 w-11"
+        className="border-2 border-black rounded-full bg-white hover:bg-yellow-300 transition-colors col-start-10"
       >
         {isMeasurement1 && <p>{m2_text.charAt(0)}</p>}
         {!isMeasurement1 && <p>{m1_text.charAt(0)}</p>}

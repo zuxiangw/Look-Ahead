@@ -111,7 +111,8 @@ const BusinessInfo = ({
     <section className="flex flex-col justify-center items-center mt-16">
       <h1 className="text-4xl font-bold">Business Info</h1>
       <HeaderUnderbar />
-      <div className="grid grid-cols-5 w-full mt-8">
+      {/*Desktop Display */}
+      <div className="sm:grid flex flex-col grid-cols-5 w-full mt-8">
         <section className="col-start-1 col-end-4">
           <div className="flex items-center justify-center mb-8 grid grid-cols-8">
             <div className="col-start-1 col-end-3 flex flex-col justify-center items-center">
@@ -172,49 +173,50 @@ const BusinessInfo = ({
         </section>
         <section className="col-start-4 col-end-6 grid grid-rows-7">
           <div className="grid grid-cols-8 mb-4">
-            <h1 className="text-2xl col-start-1 col-end-3">MON:</h1>
-            <h1 className="text-2xl col-start-3 col-end-9 mr-auto">
+            <h1 className="text-2xl col-start-2 col-end-3">MON:</h1>
+            <h1 className="text-2xl col-start-4 col-end-9 mr-auto">
               {processed_hours ? processed_hours[0] : "N/A"}
             </h1>
           </div>
           <div className="grid grid-cols-8 mb-4">
-            <h1 className="text-2xl col-start-1 col-end-3">TUE:</h1>
-            <h1 className="text-2xl col-start-3 col-end-9 mr-auto">
+            <h1 className="text-2xl col-start-2 col-end-3">TUE:</h1>
+            <h1 className="text-2xl col-start-4 col-end-9 mr-auto">
               {processed_hours ? processed_hours[1] : "N/A"}
             </h1>
           </div>
           <div className="grid grid-cols-8 mb-4">
-            <h1 className="text-2xl col-start-1 col-end-3">WED:</h1>
-            <h1 className="text-2xl col-start-3 col-end-9 mr-auto">
+            <h1 className="text-2xl col-start-2 col-end-3">WED:</h1>
+            <h1 className="text-2xl col-start-4 col-end-9 mr-auto">
               {processed_hours ? processed_hours[2] : "N/A"}
             </h1>
           </div>
           <div className="grid grid-cols-8 mb-4">
-            <h1 className="text-2xl col-start-1 col-end-3">THU:</h1>
-            <h1 className="text-2xl col-start-3 col-end-9 mr-auto">
+            <h1 className="text-2xl col-start-2 col-end-3">THU:</h1>
+            <h1 className="text-2xl col-start-4 col-end-9 mr-auto">
               {processed_hours ? processed_hours[3] : "N/A"}
             </h1>
           </div>
           <div className="grid grid-cols-8 mb-4">
-            <h1 className="text-2xl col-start-1 col-end-3">FRI:</h1>
-            <h1 className="text-2xl col-start-3 col-end-9 mr-auto">
+            <h1 className="text-2xl col-start-2 col-end-3">FRI:</h1>
+            <h1 className="text-2xl col-start-4 col-end-9 mr-auto">
               {processed_hours ? processed_hours[4] : "N/A"}
             </h1>
           </div>
           <div className="grid grid-cols-8 mb-4">
-            <h1 className="text-2xl col-start-1 col-end-3">SAT:</h1>
-            <h1 className="text-2xl col-start-3 col-end-9 mr-auto">
+            <h1 className="text-2xl col-start-2 col-end-3">SAT:</h1>
+            <h1 className="text-2xl col-start-4 col-end-9 mr-auto">
               {processed_hours ? processed_hours[5] : "N/A"}
             </h1>
           </div>
           <div className="grid grid-cols-8 mb-4">
-            <h1 className="text-2xl col-start-1 col-end-3">SUN:</h1>
-            <h1 className="text-2xl col-start-3 col-end-9 mr-auto">
+            <h1 className="text-2xl col-start-2 col-end-3">SUN:</h1>
+            <h1 className="text-2xl col-start-4 col-end-9 mr-auto">
               {processed_hours ? processed_hours[6] : "N/A"}
             </h1>
           </div>
         </section>
       </div>
+      {/*Mobile Display */}
     </section>
   );
 };
@@ -238,7 +240,7 @@ const CurrentWeather = ({ current }: any) => {
   const currentTime: string = current.last_updated.split(" ")[1];
 
   return (
-    <section className="mt-8 bg-sky-300 w-[38rem] rounded-xl">
+    <section className="mt-8 bg-sky-300 sm:w-[38rem] w-5/6 rounded-xl">
       <div className="text-3xl font-bold my-4">Now</div>
       <div>
         <h1 className="text-4xl font-bold w-min p-4 bg-white mx-auto rounded-xl">
@@ -314,7 +316,7 @@ const CurrentWeather = ({ current }: any) => {
 import DayForecast from "@/app/components/placeComponents/DayForecast/dayForecast";
 const FutureWeather = ({ forecast }: any) => {
   return (
-    <section className="flex mt-8 w-full overflow-x-scroll p-4 pb-0">
+    <section className="flex mt-8 w-full overflow-auto pb-0">
       {forecast.map((day: any) => {
         return (
           <div key={day.date_epoch} className="mr-8 w-[30rem]">
