@@ -21,7 +21,9 @@ const Page = async () => {
 };
 
 const fetchAllReviews = async () => {
-  const res = await fetch("http://localhost:3000/api/reviews");
+  const res = await fetch("http://localhost:3000/api/reviews", {
+    next: { revalidate: 0 },
+  });
 
   if (res.ok) {
     return (await res.json()).data;
