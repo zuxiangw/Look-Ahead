@@ -31,7 +31,13 @@ const Page = async ({ params }: { params: { place_id: string } }) => {
           forecast={weather_data.forecast.forecastday}
         />
       ) : (
-        <div>No Weather Available</div>
+        <section className="text-center mt-16 flex flex-col items-center">
+          <div>
+            <h1 className="text-4xl font-bold">Weather</h1>
+            <HeaderUnderbar />
+          </div>
+          <div>No Weather Data Available</div>
+        </section>
       )}
       <PlaceReviewsContainer
         google_reviews={place_data.reviews}

@@ -1,6 +1,5 @@
 import HeaderUnderbar from "@/app/components/headerUnderbar";
 import ReviewsManager from "../../../components/placeComponents/ReviewsManager";
-import { toast } from "react-hot-toast";
 
 const Page = async () => {
   const reviews = await fetchAllReviews();
@@ -28,7 +27,7 @@ const fetchAllReviews = async () => {
   if (res.ok) {
     return (await res.json()).data;
   } else {
-    toast.error("Error while fetching data");
+    return [];
   }
 };
 

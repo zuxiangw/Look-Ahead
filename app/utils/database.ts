@@ -9,9 +9,9 @@ let pool: Pool | undefined = undefined;
 export const connectDB = () => {
   if (!pool)
     pool = mysql.createPool({
-      host: "localhost",
-      user: "root",
-      password: "Nishishabi123",
+      host: process.env.DATABASE_URL,
+      user: process.env.DATABASE_USERNAME,
+      password: process.env.DATABASE_PASSWORD,
       database: "lookahead",
       dateStrings: ["DATETIME"],
       connectionLimit: 10,
