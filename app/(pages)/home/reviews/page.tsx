@@ -1,5 +1,6 @@
 import HeaderUnderbar from "@/app/components/headerUnderbar";
 import ReviewsManager from "../../../components/placeComponents/ReviewsManager";
+import { GET_reviews } from "@/app/utils/routeHandlers/reviews";
 
 const Page = async () => {
   const reviews = await fetchAllReviews();
@@ -13,24 +14,17 @@ const Page = async () => {
 };
 
 const fetchAllReviews = async () => {
-  try {
-    const res = await fetch(`https://look-ahead.vercel.app/api/reviews`, {
-      next: { revalidate: 0 },
+  const res = await GET_reviews(null);
+  if (res.ok) {
+    const reviews = (await res.json()).data;
+
+    return reviews.map((review: any) => {
+      return {
+        ...review,
+        posted_on: new Date(review.posted_on),
+      };
     });
-    if (res.ok) {
-      const reviews = (await res.json()).data;
-      if (reviews)
-        return reviews.map((review: any) => {
-          return {
-            ...review,
-            posted_on: new Date(review.posted_on),
-          };
-        });
-      else return [];
-    } else {
-      return [];
-    }
-  } catch (error) {
+  } else {
     return [];
   }
 };

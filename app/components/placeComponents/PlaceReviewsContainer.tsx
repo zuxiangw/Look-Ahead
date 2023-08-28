@@ -35,11 +35,9 @@ const PlaceReviewsContainer = async ({
   );
 };
 
+import { GET_reviews } from "@/app/utils/routeHandlers/reviews";
 const fetchPlaceReviews = async (place_id: string) => {
-  const res = await fetch(
-    `https://look-ahead.vercel.app/api/reviews?place_id=${place_id}`,
-    { method: "GET", next: { revalidate: 0 } }
-  );
+  const res = await GET_reviews(place_id);
 
   if (res.ok) return (await res.json()).data;
   else {
