@@ -7,26 +7,30 @@ const Page = async () => {
     <section className="my-8">
       <h1 className="text-4xl text-center font-bold">Reviews</h1>
       <HeaderUnderbar />
-      <ReviewsManager
-        reviews={reviews.map((review: any) => {
-          return {
-            ...review,
-            posted_on: new Date(review.posted_on),
-          };
-        })}
-      />
+      <ReviewsManager reviews={reviews} />
     </section>
   );
 };
 
 const fetchAllReviews = async () => {
-  const res = await fetch("http://localhost:3000/api/reviews", {
-    next: { revalidate: 0 },
-  });
-
-  if (res.ok) {
-    return (await res.json()).data;
-  } else {
+  try {
+    const res = await fetch(`http://127.0.0.1:3000/api/reviews`, {
+      next: { revalidate: 0 },
+    });
+    if (res.ok) {
+      const reviews = (await res.json()).data;
+      if (reviews)
+        return reviews.map((review: any) => {
+          return {
+            ...review,
+            posted_on: new Date(review.posted_on),
+          };
+        });
+      else return [];
+    } else {
+      return [];
+    }
+  } catch (error) {
     return [];
   }
 };
