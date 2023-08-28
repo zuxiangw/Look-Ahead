@@ -15,7 +15,7 @@ export default async function Page({ params }: { params: { token: string } }) {
 }
 
 const validateToken = async (token: string) => {
-  const url = `http://localhost:3000/api/myauth/validateToken?token=${token}`;
+  const url = `https://look-ahead.vercel.app/api/myauth/validateToken?token=${token}`;
   const res = await fetch(url, { next: { revalidate: 0 } });
   return res.status === 200;
 };

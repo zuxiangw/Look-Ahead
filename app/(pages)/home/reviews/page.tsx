@@ -14,7 +14,7 @@ const Page = async () => {
 
 const fetchAllReviews = async () => {
   try {
-    const res = await fetch(`http://127.0.0.1:3000/api/reviews`, {
+    const res = await fetch(`https://look-ahead.vercel.app/api/reviews`, {
       next: { revalidate: 0 },
     });
     if (res.ok) {
