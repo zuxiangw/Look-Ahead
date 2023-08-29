@@ -71,6 +71,9 @@ const handler = NextAuth({
       }
       return true;
     },
+    async redirect({ url, baseUrl }) {
+      return baseUrl;
+    },
   },
   secret: process.env.SECRET,
 });
