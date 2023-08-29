@@ -7,7 +7,7 @@ import bcrypt from "bcrypt";
 let pool: Pool | undefined = undefined;
 
 export const connectDB = () => {
-  if (!pool)
+  if (!pool) {
     pool = mysql.createPool({
       host: process.env.DATABASE_URL,
       user: process.env.DATABASE_USERNAME,
@@ -18,7 +18,15 @@ export const connectDB = () => {
       connectionLimit: 10,
       connectTimeout: 20000,
     });
+  }
   return pool;
+};
+
+export const closePool = () => {
+  if (pool) {
+    pool.destroy();
+    pool = undefined;
+  }
 };
 
 export async function insertToken(
