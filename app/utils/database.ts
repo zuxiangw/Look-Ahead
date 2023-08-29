@@ -189,31 +189,31 @@ export async function insertUser(
   imageUrl: string | undefined
 ) {
   if (!email) throw new Error("An email is required");
-  // try {
-  const connection = await connectDB();
+  try {
+    const connection = await connectDB();
 
-  let columns, column_values, password_hash;
-  if (!password && !imageUrl)
-    throw new Error("Both password and imageUrl not provided");
-  if (password && imageUrl)
-    throw new Error("Both password and imageUrl provided while signing up");
-  if (!password && imageUrl) {
-    columns = "(username, email, image_url, validated)";
-    column_values = `('${username}', '${email}', '${imageUrl}', false)`;
-  } else if (password && !imageUrl) {
-    columns = "(username, email, password_hash, validated)";
-    const password_hash = await bcrypt.hash(password, 10);
-    column_values = `('${username}', '${email}', '${password_hash}', false)`;
+    let columns, column_values, password_hash;
+    if (!password && !imageUrl)
+      throw new Error("Both password and imageUrl not provided");
+    if (password && imageUrl)
+      throw new Error("Both password and imageUrl provided while signing up");
+    if (!password && imageUrl) {
+      columns = "(username, email, image_url, validated)";
+      column_values = `('${username}', '${email}', '${imageUrl}', false)`;
+    } else if (password && !imageUrl) {
+      columns = "(username, email, password_hash, validated)";
+      const password_hash = await bcrypt.hash(password, 10);
+      column_values = `('${username}', '${email}', '${password_hash}', false)`;
+    }
+    const query = `INSERT INTO Users ${columns} VALUES ${column_values}`;
+    const [result] = await connection.query<ResultSetHeader>(query);
+
+    pool?.releaseConnection(connection);
+
+    return result.insertId;
+  } catch (error) {
+    throw error;
   }
-  const query = `INSERT INTO Users ${columns} VALUES ${column_values}`;
-  const [result] = await connection.query<ResultSetHeader>(query);
-
-  pool?.releaseConnection(connection);
-
-  return result.insertId;
-  // } catch (error) {
-  //   throw error;
-  // }
 }
 
 export async function removeUserById(id: number) {
