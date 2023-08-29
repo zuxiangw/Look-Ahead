@@ -25,7 +25,7 @@ const Page = async ({ params }: { params: { place_id: string } }) => {
         open_now={place_data.open_now}
         hours={place_data.hours}
       />
-      {/* {weather_data ? (
+      {weather_data ? (
         <Weather
           current={weather_data.current}
           forecast={weather_data.forecast.forecastday}
@@ -42,7 +42,7 @@ const Page = async ({ params }: { params: { place_id: string } }) => {
       <PlaceReviewsContainer
         google_reviews={place_data.reviews}
         place_id={params.place_id}
-      /> */}
+      />
     </section>
   );
 };
