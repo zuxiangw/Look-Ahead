@@ -20,8 +20,6 @@ export async function GET(req: NextRequest) {
     const { tokens } = await GoogleOAuth2Client.getToken(authCode);
     access = tokens.access_token;
     refresh = tokens.refresh_token;
-    console.log("printing token");
-    console.log(tokens);
     GoogleOAuth2Client.setCredentials(tokens);
   } catch (error) {
     return new NextResponse(

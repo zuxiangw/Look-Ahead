@@ -56,7 +56,9 @@ export async function insertToken(
     const query_statement = `INSERT INTO Tokens ${query_columns} VALUES ${query_prepares}`;
 
     const ret = await connection.query(query_statement, query_prepare_vals);
+    console.log("Token inserted!");
   } catch (error) {
+    console.log((error as Error).toString());
     throw error;
   }
 }

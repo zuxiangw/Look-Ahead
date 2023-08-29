@@ -16,8 +16,8 @@ const Page = async () => {
 const fetchAllReviews = async () => {
   const res = await GET_reviews(null);
   if (res.ok) {
+    console.log("Success");
     const reviews = (await res.json()).data;
-
     return reviews.map((review: any) => {
       return {
         ...review,
@@ -25,6 +25,8 @@ const fetchAllReviews = async () => {
       };
     });
   } else {
+    console.log("Fail");
+    console.log(res);
     return [];
   }
 };
