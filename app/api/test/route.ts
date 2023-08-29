@@ -7,6 +7,7 @@ export async function GET() {
       JSON.stringify({ status: 200, message: "Success!" })
     );
   } catch (error) {
+    throw error;
     return new NextResponse(
       JSON.stringify({
         status: 500,
