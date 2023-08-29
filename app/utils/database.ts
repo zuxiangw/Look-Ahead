@@ -16,15 +16,10 @@ export const connectDB = () => {
       database: "lookahead",
       dateStrings: ["DATETIME"],
       connectionLimit: 10,
+      connectTimeout: 20000,
     });
-  return pool.getConnection();
+  return pool;
 };
-
-export async function closePool() {
-  if (pool) {
-    await pool.end();
-  }
-}
 
 export async function insertToken(
   user_id: number,
@@ -33,7 +28,7 @@ export async function insertToken(
   created_at: Date | undefined,
   expires_at: Date | undefined
 ) {
-  const connection = await connectDB();
+  const connection = connectDB();
   try {
     if (!created_at) {
       created_at = new Date();
@@ -67,13 +62,11 @@ export async function insertToken(
     console.log("Error occured while inserting: ");
     console.log((error as Error).toString());
     throw error;
-  } finally {
-    pool?.releaseConnection(connection);
   }
 }
 
 export async function validateToken(token_value: string) {
-  const connection = await connectDB();
+  const connection = connectDB();
   try {
     const query = `SELECT DISTINCT * FROM Tokens WHERE token_value = '${token_value}'`;
     const [ret_query] = await connection.query<Token[]>(query);
@@ -98,17 +91,14 @@ export async function validateToken(token_value: string) {
     return true;
   } catch (error) {
     throw error;
-  } finally {
-    pool?.releaseConnection(connection);
   }
 }
 
 export async function removeTokenByUserId(user_id: number) {
-  const connection = await connectDB();
+  const connection = connectDB();
 
   const query = `DELETE FROM Tokens WHERE user_id = ${user_id}`;
   connection.query(query);
-  pool?.releaseConnection(connection);
 }
 
 export async function updateRegisterToken(
@@ -117,7 +107,7 @@ export async function updateRegisterToken(
   created_at: Date,
   expires_at: Date
 ) {
-  const connection = await connectDB();
+  const connection = connectDB();
 
   const query = `UPDATE Tokens SET token_value = '${token_value}', created_at = '${created_at
     .toISOString()
@@ -127,11 +117,10 @@ export async function updateRegisterToken(
     .slice(0, 19)
     .replace("T", " ")}' WHERE user_id = ${user_id}`;
   const ret_query = await connection.query(query);
-  pool?.releaseConnection(connection);
 }
 
 export async function getAdminTokens() {
-  const connection = await connectDB();
+  const connection = connectDB();
   try {
     const access_query =
       "SELECT * FROM Tokens WHERE user_id = 1 AND token_type = 'access'";
@@ -151,34 +140,28 @@ export async function getAdminTokens() {
     return tokens;
   } catch (error) {
     throw error;
-  } finally {
-    pool?.releaseConnection(connection);
   }
 }
 
 export async function searchUserByEmail(email: string) {
-  const connection = await connectDB();
+  const connection = connectDB();
   try {
     const query = `SELECT DISTINCT * FROM Users WHERE email = '${email}'`;
     const [ret_query] = await connection.query<User[]>(query);
     return ret_query;
   } catch (error) {
     throw error;
-  } finally {
-    pool?.releaseConnection(connection);
   }
 }
 
 export async function searchUserById(id: number) {
-  const connection = await connectDB();
+  const connection = connectDB();
   try {
     const query = `SELECT * FROM Users WHERE id = ${id}`;
     const [ret_query] = await connection.query<User[]>(query);
     return ret_query;
   } catch (error) {
     throw error;
-  } finally {
-    pool?.releaseConnection(connection);
   }
 }
 
@@ -190,7 +173,7 @@ export async function insertUser(
 ) {
   if (!email) throw new Error("An email is required");
   try {
-    const connection = await connectDB();
+    const connection = connectDB();
 
     let columns, column_values, password_hash;
     if (!password && !imageUrl)
@@ -208,8 +191,6 @@ export async function insertUser(
     const query = `INSERT INTO Users ${columns} VALUES ${column_values}`;
     const [result] = await connection.query<ResultSetHeader>(query);
 
-    pool?.releaseConnection(connection);
-
     return result.insertId;
   } catch (error) {
     throw error;
@@ -217,20 +198,18 @@ export async function insertUser(
 }
 
 export async function removeUserById(id: number) {
-  const connection = await connectDB();
+  const connection = connectDB();
 
   const query = `DELETE FROM Users WHERE id = ${id}`;
   try {
-    connection.query(query);
+    await connection.query(query);
   } catch (error) {
     throw error;
-  } finally {
-    pool?.releaseConnection(connection);
   }
 }
 
 export async function updatePasswordWithToken(token: string, password: string) {
-  const connection = await connectDB();
+  const connection = connectDB();
   try {
     const token_query = `SELECT * FROM Tokens WHERE token_value = '${token}'`;
     const [token_ret] = await connection.query<Token[]>(token_query);
@@ -244,38 +223,32 @@ export async function updatePasswordWithToken(token: string, password: string) {
     await connection.query(update_query);
   } catch (error) {
     throw error;
-  } finally {
-    pool?.releaseConnection(connection);
   }
 }
 
 export const removeTokenByValue = async (value: string) => {
-  const connection = await connectDB();
+  const connection = connectDB();
   try {
     const query = `DELETE FROM Tokens WHERE token_value = '${value}'`;
     await connection.query(query);
   } catch (error) {
     throw error;
-  } finally {
-    pool?.releaseConnection(connection);
   }
 };
 
 export async function getAllReviews() {
-  const connection = await connectDB();
+  const connection = connectDB();
   try {
     const query = "SELECT * FROM Reviews";
     const [ret_query] = await connection.query<Review[]>(query);
     return ret_query;
   } catch (error) {
     throw error;
-  } finally {
-    pool?.releaseConnection(connection);
   }
 }
 
 export async function getReviewsByPlaceId(place_id: string) {
-  const connection = await connectDB();
+  const connection = connectDB();
   try {
     const query = `SELECT * FROM Reviews WHERE place_id = '${place_id}'`;
 
@@ -284,8 +257,6 @@ export async function getReviewsByPlaceId(place_id: string) {
     return ret_query;
   } catch (error) {
     throw error;
-  } finally {
-    pool?.releaseConnection(connection);
   }
 }
 
@@ -297,7 +268,7 @@ export async function addReview(
   review_text: string,
   review_rating: number
 ) {
-  const connection = await connectDB();
+  const connection = connectDB();
 
   const query =
     "INSERT INTO Reviews (user_id, place_id, place_name, review_title, review_text, review_rating, posted_on) VALUES (?, ?, ?, ?, ?, ?, ?)";
@@ -314,8 +285,6 @@ export async function addReview(
     ]);
   } catch (error) {
     throw new Error((error as Error).toString());
-  } finally {
-    pool?.releaseConnection(connection);
   }
 }
 
