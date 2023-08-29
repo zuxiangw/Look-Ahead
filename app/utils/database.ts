@@ -58,6 +58,7 @@ export async function insertToken(
     const ret = await connection.query(query_statement, query_prepare_vals);
     console.log("Token inserted!");
   } catch (error) {
+    console.log("Error occured while inserting: ");
     console.log((error as Error).toString());
     throw error;
   }

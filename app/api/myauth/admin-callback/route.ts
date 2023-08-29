@@ -38,6 +38,7 @@ export async function GET(req: NextRequest) {
       })
     );
 
+  console.log("Inserting tokens asynchronously");
   insertToken(1, "access", access, undefined, undefined);
   insertToken(1, "refresh", refresh, undefined, undefined);
 
