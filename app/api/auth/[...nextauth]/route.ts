@@ -52,9 +52,6 @@ const handler = NextAuth({
       },
     }),
   ],
-  // pages: {
-  //   signIn: "/auth",
-  // },
   callbacks: {
     async signIn({ user }) {
       if (!user.email) return false;
