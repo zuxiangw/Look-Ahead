@@ -65,7 +65,9 @@ const signUp = async (
   });
 
   if (res.ok) {
-    toast.success("An verification email has been sent to your email!");
+    toast.success(
+      "An verification email has been sent to your email! You may need to check spam."
+    );
     toSignIn();
   } else toast.error(await res.text());
 };
@@ -89,6 +91,8 @@ const forget = async (email: string) => {
   });
 
   if (res.ok)
-    toast.success("An reset link has been send to your email if it exists!");
+    toast.success(
+      "An reset link has been send to your email if it exists! You may need to check spam."
+    );
   else toast.error(await res.text());
 };

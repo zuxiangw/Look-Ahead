@@ -35,7 +35,7 @@ async function performForget(email: string) {
     const expires_at = new Date(created_at.getTime() + 1000 * 60 * 5);
     try {
       await insertToken(user.id, "reset", reset_token, created_at, expires_at);
-      const body = `You have requested to reset your password for Look Ahead. Please ignore if you did not do this. \nPlease head to the following link to reset your password: http://localhost:3000/auth/action/forget/${reset_token}\n`;
+      const body = `You have requested to reset your password for Look Ahead. Please ignore if you did not do this. \nPlease head to the following link to reset your password: https://look-ahead.vercel.app/auth/action/forget/${reset_token}\n`;
       await sendAdminMail(user.email, "Reset Password Link", body);
     } catch (error) {
       throw error;

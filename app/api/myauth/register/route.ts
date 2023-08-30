@@ -62,7 +62,7 @@ export async function POST(req: NextRequest) {
   try {
     const recipient = email;
     const subject = "Verify your registration!";
-    const message = `You have requested to sign up for Look Ahead. Please ignore if you did not do this.\nhttp://localhost:3000/auth/action/register/${token_value}`;
+    const message = `You have requested to sign up for Look Ahead. Please ignore if you did not do this.\nhttps://look-ahead.vercel.app/auth/action/register/${token_value}`;
     sendAdminMail(recipient, subject, message);
     return new NextResponse("Success", { status: 200 });
   } catch (error) {
