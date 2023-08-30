@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 import { insertToken } from "@/app/utils/database";
-import { google } from "googleapis";
 import GoogleOAuth2Client from "@/app/utils/authclient";
 
 export async function GET(req: NextRequest) {

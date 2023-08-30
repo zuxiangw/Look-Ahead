@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 import { removeTokenByValue, validateToken } from "@/app/utils/database";
-import { RowDataPacket } from "mysql2";
 export async function GET(req: NextRequest) {
   const token_value = req.nextUrl.searchParams.get("token");
   console.log(`received request for token: ${token_value}`);
