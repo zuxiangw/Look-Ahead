@@ -37,13 +37,13 @@ export async function POST(req: NextRequest) {
   const expires_at = new Date(created_at.getTime() + 1000 * 60 * 5);
   const user_id = await insertUser(username, email, password, undefined);
   await insertToken(user_id, token_type, token_value, created_at, expires_at);
-  // try {
-  const recipient = email;
-  const subject = "Verify your registration!";
-  const message = `LOCAL You have requested to sign up for Look Ahead. Please ignore if you did not do this.\nhttps://look-ahead.vercel.app/auth/action/register/${token_value}`;
-  await sendAdminMail(recipient, subject, message);
-  return new NextResponse("Success", { status: 200 });
-  // } catch (error) {
-  //   return new NextResponse((error as Error).toString(), { status: 500 });
-  // }
+  try {
+    const recipient = email;
+    const subject = "Verify your registration!";
+    const message = `You have requested to sign up for Look Ahead. Please ignore if you did not do this.\nhttps://look-ahead.vercel.app/auth/action/register/${token_value}`;
+    await sendAdminMail(recipient, subject, message);
+    return new NextResponse("Success", { status: 200 });
+  } catch (error) {
+    return new NextResponse((error as Error).toString(), { status: 500 });
+  }
 }
