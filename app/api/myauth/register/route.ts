@@ -5,6 +5,7 @@ import {
   createToken,
   removeTokenByUserId,
   removeUserById,
+  deleteTokenIfExists,
 } from "@/app/utils/database";
 import { sendAdminMail } from "@/app/utils/mail";
 import { insertToken } from "@/app/utils/database";
@@ -26,7 +27,7 @@ export async function POST(req: NextRequest) {
         status: 409,
       });
     else {
-      await removeTokenByUserId(user.id);
+      await deleteTokenIfExists(user.id, "register");
       await removeUserById(user.id);
     }
   }

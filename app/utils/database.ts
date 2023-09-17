@@ -109,6 +109,17 @@ export async function removeTokenByUserId(user_id: number) {
   connection.query(query);
 }
 
+export async function deleteTokenIfExists(user_id: number, token_type: string) {
+  const connection = connectDB();
+
+  const query = `DELETE FROM Tokens WHERE user_id = ${user_id} AND token_type = '${token_type}'`;
+  try {
+    await connection.query(query);
+  } catch (error) {
+    throw error;
+  }
+}
+
 export async function updateRegisterToken(
   user_id: number,
   token_value: string,

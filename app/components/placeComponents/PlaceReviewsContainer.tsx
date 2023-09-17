@@ -49,9 +49,10 @@ const fetchPlaceReviews = async (place_id: string) => {
 const GoogleReviewsContainer = ({ reviews }: { reviews: Review[] }) => {
   return (
     <div className="sm:grid flex flex-col grid-cols-2 gap-4 mt-4 mx-4 text-2xl">
-      {reviews.map((review: Review, idx: number) => {
-        return <GoogleReview key={idx} review={review} />;
-      })}
+      {reviews &&
+        reviews.map((review: Review, idx: number) => {
+          return <GoogleReview key={idx} review={review} />;
+        })}
     </div>
   );
 };

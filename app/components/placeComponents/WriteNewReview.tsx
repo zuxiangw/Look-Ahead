@@ -111,7 +111,7 @@ const WriteNewReview = ({ place_id }: { place_id: string }) => {
           <textarea
             name="text"
             onChange={updateInputText}
-            className="w-full border-2 border-black h-20 resize-none"
+            className="w-full border-2 border-black h-20 resize-none p-2"
             id="inp_text"
           />
           <div className="flex flex-row">
