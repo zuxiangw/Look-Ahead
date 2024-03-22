@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 import { GET_reviews, POST_reviews } from "@/app/utils/routeHandlers/reviews";
-
 export async function GET(req: NextRequest) {
   const place_id = req.nextUrl.searchParams.get("place_id");
   const res = await GET_reviews(place_id);

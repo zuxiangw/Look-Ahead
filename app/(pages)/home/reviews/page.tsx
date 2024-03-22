@@ -15,20 +15,13 @@ const Page = async () => {
 };
 
 const fetchAllReviews = async () => {
-  const res = await fetch("https://look-ahead.vercel.app/api/reviews", {
-    next: { revalidate: 0 },
+  const reviews = await getAllReviews();
+  return reviews.map((review: any) => {
+    return {
+      ...review,
+      posted_on: new Date(review.posted_on),
+    };
   });
-  if (res.ok) {
-    const reviews = (await res.json()).data;
-    return reviews.map((review: any) => {
-      return {
-        ...review,
-        posted_on: new Date(review.posted_on),
-      };
-    });
-  } else {
-    return [];
-  }
 };
 
 export default Page;
